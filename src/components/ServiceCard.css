@@ -1,0 +1,9 @@
+.Cardusluga{
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    background-color: #f9f9f9;
+    content: center;
+    text-align: center;
+}
