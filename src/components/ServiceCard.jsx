@@ -1,24 +1,20 @@
 import './ServiceCard.css'
 
 
-function CardUsluga(usluga) {
-
+function CardUsluga(props) {
     return (
+        <>
+            <div>
+                <h3>Название услуги:{props.service.name}</h3>
+                <p> Время оказания услуги:{props.service.whaitMin}</p>
+                <p> Срок оказания услуги:{props.service.resultDays}</p>
+            </div>
+            <button>Записаться на: {props.service.name} </button>
+            <br />
 
-        <div className="Cardusluga">
-
-            <p>ID услуги: {usluga.id} </p>
-            <p>📄 Название услуги: {usluga.name}</p>
-            <p>⏱Длительность приема: {usluga.whaitMin}минут</p>
-            <p>📅Сколко ждат услуги {usluga.resultDays} рабочих дня</p>
-            <button className="buttonPodrob" onClick={() =>
-
-                usluga.setUsluga(usluga.name)
-
-            }>Подробнее</button>
-        </div>
-
+        </>
     )
 }
 
 export default CardUsluga
+

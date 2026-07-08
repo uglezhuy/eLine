@@ -2,52 +2,38 @@
 import './App.css'
 
 import CardUsluga from './components/ServiceCard'
-import uslugas from './data/services.js'
+import CardList from './components/ServiceList'
+
+import services from './data/services.js'
 import { useState } from 'react'
+
+
+
+
+
+
+
+
+
 
 
 
 function App() {
 
-  const [uslugaLog, setUsluga] = useState(null);
 
-  function getUsluga() {
-
-    return (
-
-      <h1>УСЛУГА: {uslugaLog}</h1>
-
-    );
-
-  }
   return (
     <>
-      {getUsluga()}
+      <h1>  Доступные услуги</h1>
 
 
-      {uslugas.map((usluga) => (
-        <CardUsluga
-          key={usluga.id}
-          id={usluga.id}
-          name={usluga.name}
-          whaitMin={usluga.whaitMin}
-          resultDays={usluga.resultDays}
-          setUsluga={setUsluga}
-        />
-      ))}
 
+      <CardList
+        key={service.id}
+        services={services}
+      />
 
     </>
   );
 }
-
-
-
-
-
-
-
-
-
 
 export default App;
