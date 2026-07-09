@@ -1,17 +1,28 @@
 import './ServiceCard.css'
 import CardUsluga from '../components/ServiceCard'
 
-
 function CardUslugaList(props) {
-    return (
-        props.services.map((service) => {
+
+
+
+
+
+    return (<>
+        {props.services.map((service) => {
             return (
-                <>
-                    < CardUsluga
-                        service={service} />
-                </>)
+                <CardUsluga
+
+                    key={service.id}
+
+                    service={service}
+
+                    setServiceZapis={props.setServiceZapis}
+
+                />
+            )
         }
-        )
+        )}
+    </>
     );
 }
 
