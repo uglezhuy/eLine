@@ -26,7 +26,7 @@ function CardUslugaList(props) {
     );
 }
 
-v
+
 export default CardUslugaList
 
 
