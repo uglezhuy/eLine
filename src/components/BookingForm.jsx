@@ -10,13 +10,21 @@ import { useState } from 'react'
 
 function BookingForm(props) {
 
+
+
+    const [selectedScheduleId, setSelectedScheduleId] = useState(null);
+
+
     function handleSubmit() {
+        console.log("Данные о пользователе получены");
         console.log(name);
         console.log(phone);
-        console.log(props.serviceZapis);
+        console.log(props.selectedService);
 
-        props.setRequests([...props.requests, { service: props.serviceZapis, name: name, phone: phone }])
+        props.setRequests([...props.requests, { service: props.selectedService.name, name: name, phone: phone, selectedScheduleId: selectedScheduleId, status: "Ожидает подтверждения" }])
 
+        setName("");
+        setPhone("");
 
     }
 
@@ -30,19 +38,49 @@ function BookingForm(props) {
     return (
         <>
             <h3>
-                Выбрана услуга: {props.serviceZapis === 0 ? "Услуга не выбрана" : props.serviceZapis}
+                Выбрана услуга: {props.selectedService === null ? "Услуга не выбрана" : props.selectedService.name}
             </h3>
-            {props.serviceZapis === 0 ? "" : <div>    ФИО: <input
+            {props.selectedService === null ? "" : <div>    ФИО: <input
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
             /></div>}
-            {props.serviceZapis === 0 ? "" : <div>    Телефон: <input
+            {props.selectedService === null ? "" : <div>    Телефон: <input
                 type="text"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
             /></div>}
-            {props.serviceZapis === 0 ? "" : <div>    <button onClick={() => handleSubmit()} >Записаться</button></div>}
+
+
+            {props.selectedService === null ? "" : <div> Выберете дуступное время для  услуги: {props.selectedService.name} </div>}
+
+
+
+
+            <>
+                <div>{
+                    props.schedule.map((time) => {
+
+                        const isBusy = props.requests.some(
+                            (request) =>
+
+                                request.selectedScheduleId === time.id
+                        );
+
+                        return isBusy ? null : (
+                            <>
+                                <button onClick={() => setSelectedScheduleId(time.id)}>
+                                    {time.time}
+                                </button>
+                                <br />
+                            </>
+                        );
+                    })}
+                </div>
+            </>
+
+            <br />
+            {props.selectedService === null ? "" : <div>    <button onClick={() => handleSubmit()} >Записаться</button></div>}
         </>
     );
 }

@@ -4,6 +4,7 @@ const services = [
     name: "Получение справки",
     duration: 5,
     readyDays: 2,
+    availableTime: ["09:00", "09:40", "10:20"],
   },
 
   {
@@ -11,6 +12,7 @@ const services = [
     name: "Заселение в общежитие",
     duration: 20,
     readyDays: 3,
+    availableTime: ["09:00", "09:40", "10:20"],
   },
 
   {
@@ -18,6 +20,8 @@ const services = [
     name: "Перевод на новую специальность",
     duration: 30,
     readyDays: 7,
+    availableTime: ["09:00", "09:40", "10:20"],
   },
 ];
+
 export default services;

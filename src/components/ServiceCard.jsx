@@ -9,8 +9,10 @@ function CardUsluga(props) {
                 <p> Время оказания услуги:{props.service.duration}</p>
                 <p> Срок оказания услуги:{props.service.readyDays}</p>
             </div>
-            <button onClick={() => props.setServiceZapis(props.service.name)}>Записаться на: {props.service.name} </button>
-            <br />
+
+            <button onClick={() => props.setSelectedService(props.service)}>
+                Записаться на: {props.service.name}
+            </button>            <br />
 
         </>
     )

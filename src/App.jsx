@@ -2,16 +2,33 @@ import './App.css'
 
 import CardList from './components/ServiceList'
 import BookingForm from './components/BookingForm'
+import Requestslist from './components/RequestsList'
 
 import services from './data/services.js'
+import schedule from './data/schedule.js'
+
 import { useState } from 'react'
+import RequestsCard from './components/RequestsList.jsx'
 
 
 
 function App() {
-  const [serviceZapis, setServiceZapis] = useState(0);
+  const [selectedService, setSelectedService] = useState(null);
+
 
   const [requests, setRequests] = useState([]);
+
+
+
+  function chengeStatus(id) {
+    setRequests(
+      requests.map((r) =>
+        r.id === id
+          ? { ...r, status: "Подтверждено" }
+          : r
+      )
+    );
+  }
 
   return (
     <>
@@ -22,18 +39,26 @@ function App() {
 
       <CardList
         services={services}
-        serviceZapis={serviceZapis}
-        setServiceZapis={setServiceZapis}
+        selectedService={selectedService}
+        setSelectedService={setSelectedService}
 
       />
 
       <BookingForm
-        serviceZapis={serviceZapis}
+        selectedService={selectedService}
 
         requests={requests}
+        schedule={schedule}
+
         setRequests={setRequests}
 
       />
+      <Requestslist
+        requests={requests}
+        chengeStatus={chengeStatus}
+      />
+
+
 
     </>
   );
