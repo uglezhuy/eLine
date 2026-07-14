@@ -13,6 +13,7 @@ function BookingForm(props) {
 
 
     const [selectedScheduleId, setSelectedScheduleId] = useState(null);
+    const [selectedDay, selectedDaySet] = useState(null);
 
 
     function handleSubmit() {
@@ -27,6 +28,23 @@ function BookingForm(props) {
         setPhone("");
 
     }
+
+    function getUniqueDays(days) {
+
+        const daysList = new Set();
+        const uniqueDays = [];
+
+        days.forEach((day) => {
+            const dateKey = `${day.day}-${day.month}-${day.year}`;
+
+            if (!daysList.has(dateKey)) {
+                daysList.add(dateKey);
+                uniqueDays.push(day);
+            };
+        })
+        return uniqueDays;
+    }
+
 
     const [name, setName] = useState("");
     const [phone, setPhone] = useState("");
@@ -59,24 +77,49 @@ function BookingForm(props) {
 
             <>
                 <div>{
-                    props.schedule.map((time) => {
-
-                        const isBusy = props.requests.some(
-                            (request) =>
-
-                                request.selectedScheduleId === time.id
-                        );
-
-                        return isBusy ? null : (
+                    getUniqueDays(props.schedule).map((day) => {
+                        return (
                             <>
-                                <button onClick={() => setSelectedScheduleId(time.id)}>
-                                    {time.time}
+                                <button onClick={() => selectedDaySet(day)}>
+                                    {day.day + "/" + day.month + "/" + day.year}
                                 </button>
                                 <br />
                             </>
                         );
                     })}
                 </div>
+
+
+                {selectedDay === null ? "Дата не выбранна" :
+                    <> <div> Выбрана дата: {selectedDay.day + "/" + selectedDay.month + "/" + selectedDay.year}</div>
+                        <div>Выберите время:</div>
+                        <div>{
+                            props.schedule.map((time) => {
+
+                                if (time.day !== selectedDay.day || time.month !== selectedDay.month || time.year !== selectedDay.year) {
+                                    return null;
+                                }
+
+                                const isBusy = props.requests.some(
+                                    (request) =>
+
+                                        request.selectedScheduleId === time.id
+                                );
+
+                                return isBusy ? null : (
+                                    <>
+                                        <button onClick={() => setSelectedScheduleId(time.id)}>
+                                            {time.time + "/" + time.day + "/" + time.month + "/" + time.year}
+                                        </button>
+                                        <br />
+                                    </>
+                                );
+                            })}
+                        </div>
+
+                    </>}
+
+
             </>
 
             <br />
