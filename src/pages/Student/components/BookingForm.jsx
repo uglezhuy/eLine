@@ -22,7 +22,7 @@ function BookingForm(props) {
         console.log(phone);
         console.log(props.selectedService);
 
-        props.setRequests([...props.requests, { service: props.selectedService.name, name: name, phone: phone, selectedScheduleId: selectedScheduleId, status: "Ожидает подтверждения" }])
+        props.setRequests([...props.requests, { id: props.requests.length + 1, service: props.selectedService.name, name: name, studentTicket: studentTicket, phone: phone, commentStudent: commentStudent, selectedScheduleId: selectedScheduleId, status: "Ожидает подтверждения", createdAt: new Date().toLocaleString("ru-RU") }])
 
         setName("");
         setPhone("");
@@ -47,10 +47,12 @@ function BookingForm(props) {
 
 
     const [name, setName] = useState("");
+    const [studentTicket, setStudentTicket] = useState("");
     const [phone, setPhone] = useState("");
+    const [commentStudent, setcommentStudent] = useState("");
 
 
-
+    //  visitDate, visitTime
 
 
     return (
@@ -58,17 +60,31 @@ function BookingForm(props) {
             <h3>
                 Выбрана услуга: {props.selectedService === null ? "Услуга не выбрана" : props.selectedService.name}
             </h3>
+
             {props.selectedService === null ? "" : <div>    ФИО: <input
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
             /></div>}
+
+            {props.selectedService === null ? "" : <div>    Номер студенческого билета: <input
+                type="text"
+                value={studentTicket}
+                onChange={(e) => setStudentTicket(e.target.value)}
+            /></div>}
+
+
             {props.selectedService === null ? "" : <div>    Телефон: <input
                 type="text"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
             /></div>}
 
+            {props.selectedService === null ? "" : <div>    Комментарий к обращению студнента: <input
+                type="text"
+                value={commentStudent}
+                onChange={(e) => setcommentStudent(e.target.value)}
+            /></div>}
 
             {props.selectedService === null ? "" : <div> Выберете дуступное время для  услуги: {props.selectedService.name} </div>}
 

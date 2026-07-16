@@ -1,68 +1,53 @@
-import './App.css'
-
-import CardList from './components/ServiceList'
-import BookingForm from './components/BookingForm'
-import Requestslist from './components/RequestsList'
-
-import services from './data/services.js'
-import schedule from './data/schedule.js'
-
-import { useState } from 'react'
-import RequestsCard from './components/RequestsList.jsx'
+import StudentPage from './pages/Student/StudentPage.jsx'
+import AdminPage from './pages/Admin/AdminPage.jsx'
 
 
+import { Routes, Route } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useState } from "react";
 
 function App() {
-  const [selectedService, setSelectedService] = useState(null);
-
 
   const [requests, setRequests] = useState([]);
 
-
-
-  function chengeStatus(id) {
-    setRequests(
-      requests.map((r) =>
-        r.id === id
-          ? { ...r, status: "Подтверждено" }
-          : r
-      )
-    );
-  }
-
   return (
-    <>
-      {console.log(requests)}
-      <h1>  Доступные услуги</h1>
+    <Routes>
 
+      <Route
 
+        path="/"
 
-      <CardList
-        services={services}
-        selectedService={selectedService}
-        setSelectedService={setSelectedService}
+        element={
+
+          <div className="App">
+
+            <h1>Выберите страницу:</h1>
+
+            <Link to="/student">Студент</Link>
+
+            <br />
+
+            <Link to="/admin">Администратор</Link>
+
+          </div>
+
+        }
 
       />
 
-      <BookingForm
-        selectedService={selectedService}
-
+      <Route path="/student" element={<StudentPage
         requests={requests}
-        schedule={schedule}
-
         setRequests={setRequests}
+      />} />
 
-      />
-      <Requestslist
+      <Route path="/admin" element={<AdminPage
         requests={requests}
-        chengeStatus={chengeStatus}
-      />
+        setRequests={setRequests}
+      />} />
 
+    </Routes>
+  )
 
-
-    </>
-  );
 }
 
 export default App;
-

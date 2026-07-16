@@ -15,7 +15,9 @@ function RequestsList(props) {
                 <RequestsCard
                     key={index}
                     request={request}
-                    chengeStatus={props.chengeStatus}
+                    changeStatus={props.changeStatus}
+                    isAdmin={props.isAdmin}
+                    AddAdminComent={props.AddAdminComent}
 
                 />
             ))}
