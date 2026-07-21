@@ -7,7 +7,7 @@ import BookingForm from './components/BookingForm.jsx'
 import Requestslist from '../../components/Requests/RequestsList.jsx'
 
 import services from '../../data/services.js'
-import schedule from '../../data/schedule.js'
+
 
 import { useState } from 'react'
 import RequestsCard from '../../components/Requests/RequestsList.jsx'
@@ -44,7 +44,7 @@ function StudentPage(props) {
                 selectedService={selectedService}
 
                 requests={props.requests}
-                schedule={schedule}
+                schedule={props.schedule}
 
                 setRequests={props.setRequests}
 
@@ -52,6 +52,8 @@ function StudentPage(props) {
             <Requestslist
                 requests={props.requests}
                 isAdmin={false}
+                schedule={props.schedule}
+
 
             />
 

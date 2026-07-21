@@ -17,7 +17,9 @@ function RequestsList(props) {
                     request={request}
                     changeStatus={props.changeStatus}
                     isAdmin={props.isAdmin}
-                    AddAdminComent={props.AddAdminComent}
+                    updateRequestField={props.updateRequestField}
+                    startWork={props.startWork}// костыль
+                    schedule={props.schedule}
 
                 />
             ))}

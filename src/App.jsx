@@ -1,6 +1,6 @@
 import StudentPage from './pages/Student/StudentPage.jsx'
 import AdminPage from './pages/Admin/AdminPage.jsx'
-
+import schedule from '../src/data/schedule.js'
 
 import { Routes, Route } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -38,11 +38,13 @@ function App() {
       <Route path="/student" element={<StudentPage
         requests={requests}
         setRequests={setRequests}
+        schedule={schedule}
       />} />
 
       <Route path="/admin" element={<AdminPage
         requests={requests}
         setRequests={setRequests}
+        schedule={schedule}
       />} />
 
     </Routes>
