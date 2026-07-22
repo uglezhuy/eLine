@@ -20,6 +20,7 @@ function RequestsList(props) {
                     updateRequestField={props.updateRequestField}
                     startWork={props.startWork}// костыль
                     schedule={props.schedule}
+                    loadRequests={props.loadRequests}
 
                 />
             ))}

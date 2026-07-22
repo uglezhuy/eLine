@@ -4,11 +4,25 @@ import schedule from '../src/data/schedule.js'
 
 import { Routes, Route } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
 function App() {
 
   const [requests, setRequests] = useState([]);
+
+  function loadRequests() {
+    fetch("http://localhost:8888/backend/api/getRequests.php")
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        setRequests(data);
+      });
+  }
+
+  useEffect(() => {
+    loadRequests();
+  }, []);
+
+
 
   return (
     <Routes>
@@ -39,12 +53,14 @@ function App() {
         requests={requests}
         setRequests={setRequests}
         schedule={schedule}
+        loadRequests={loadRequests}
       />} />
 
       <Route path="/admin" element={<AdminPage
         requests={requests}
         setRequests={setRequests}
         schedule={schedule}
+        loadRequests={loadRequests}
       />} />
 
     </Routes>

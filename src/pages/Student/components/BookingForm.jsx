@@ -12,15 +12,7 @@ function BookingForm(props) {
 
 
 
-    console.log("===== PROPS =====");
 
-    console.log(props);
-
-    console.log("===== SCHEDULE =====");
-
-    console.log(props.schedule);
-
-    console.log("===== END =====");
 
     const [selectedScheduleId, setSelectedScheduleId] = useState(null);
     const [selectedDay, selectedDaySet] = useState(null);
@@ -32,11 +24,41 @@ function BookingForm(props) {
         console.log(phone);
         console.log(props.selectedService);
 
-        props.setRequests([...props.requests, { id: props.requests.length + 1, service: props.selectedService.name, name: name, studentTicket: studentTicket, phone: phone, commentStudent: commentStudent, selectedScheduleId: selectedScheduleId, status: "Ожидает подтверждения", createdAt: new Date().toLocaleString("ru-RU") }])
+        //props.setRequests([...props.requests, { id: props.requests.length + 1, service: props.selectedService.name, name: name, studentTicket: studentTicket, phone: phone, commentStudent: commentStudent, selectedScheduleId: selectedScheduleId, status: "Ожидает подтверждения", createdAt: new Date().toLocaleString("ru-RU") }])
+
+        // id: props.requests.length + 1,    createdAt: new Date().toLocaleString("ru-RU") }])
+
+
+
+        fetch("http://localhost:8888/backend/api/addRequest.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                service: props.selectedService.name,
+                name: name,
+                studentTicket: studentTicket,
+                phone: phone,
+                commentStudent: commentStudent,
+                selectedScheduleId: selectedScheduleId,
+                status: "Ожидает подтверждения"
+            })
+
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+                if (data.success) {
+                    props.loadRequests();
+                }
+            });
+
 
         setName("");
         setPhone("");
-
+        setcommentStudent("")
+        setStudentTicket("");
     }
 
     function getUniqueDays(days) {
@@ -118,21 +140,25 @@ function BookingForm(props) {
                     </div>
 
                     {selectedDay === null ? "Дата не выбранна" :
+
                         <> <div> Выбрана дата: {selectedDay.day + "/" + selectedDay.month + "/" + selectedDay.year}</div>
                             <div>Выберите время:</div>
                             <div>{
+
+
                                 props.schedule.map((time) => {
 
                                     if (time.day !== selectedDay.day || time.month !== selectedDay.month || time.year !== selectedDay.year) {
                                         return null;
                                     }
 
+
                                     const isBusy = props.requests.some(
                                         (request) =>
 
                                             request.selectedScheduleId === time.id
                                     );
-
+                                    console.log(time.id, isBusy);
                                     return isBusy ? null : (
                                         <>
                                             <button onClick={() => setSelectedScheduleId(time.id)}>

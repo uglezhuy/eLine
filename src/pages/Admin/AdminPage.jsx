@@ -3,6 +3,10 @@ import Requestslist from '../../components/Requests/RequestsList.jsx'
 import BottonFilter from './components/BottonFilter.jsx'
 import { useState } from 'react'
 
+import { changeStatus, startWork, updateRequestField } from '../../../backend/api/requestApi.js'
+
+
+
 
 function AdminPage(props) {
 
@@ -52,64 +56,6 @@ function AdminPage(props) {
                     : filterSearchText;
 
 
-    function changeStatus(id, newStatus) {
-        props.setRequests(
-            props.requests.map((r) =>
-                r.id === id
-                    ? {
-                        ...r, status: newStatus,
-                        statusChangedAt: new Date().toLocaleString("ru-RU")
-                    }
-                    : r
-            )
-        );
-    }
-
-    // function AddAdminComent(id, commentAdmin) {
-    //     props.setRequests(
-    //         props.requests.map((r) =>
-    //             r.id === id
-    //                 ? { ...r, commentAdmin: commentAdmin }
-    //                 : r
-    //         )
-    //     );
-
-    // }
-
-
-    function updateRequestField(id, value, fieldName) {
-        props.setRequests(prevRequests =>
-
-            prevRequests.map((r) =>
-
-                r.id === id
-
-                    ? { ...r, [fieldName]: value }
-
-                    : r
-
-            )
-
-        );
-    }
-
-    //костыль для тк если использует на кнопке 2 функции они вызывают запирание потом как то переделать
-    function startWork(id, nameAdmin) {
-        props.setRequests(
-            props.requests.map((r) =>
-                r.id === id
-                    ? {
-                        ...r,
-                        status: "В обработке",
-                        nameAdminInWork: nameAdmin
-                    }
-                    : r
-            )
-        );
-    }
-
-
-
 
 
     console.log(statusFilter);
@@ -156,8 +102,10 @@ function AdminPage(props) {
                 changeStatus={changeStatus}
                 updateRequestField={updateRequestField}
                 isAdmin={true}
-                startWork={startWork}//костыль
+                startWork={startWork} //костыль
                 schedule={props.schedule}
+                loadRequests={props.loadRequests}
+
             />
         </>
     );
