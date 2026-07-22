@@ -25,6 +25,19 @@ $stmt->bindParam(':status', $data['status']);
 
 $stmt->execute();
 
+
+
+//добавление занятости schedule
+$sql = "UPDATE schedule SET is_busy = 1 WHERE id = :id";
+$stmt = $pdo->prepare($sql);
+$stmt->bindParam(':id', $data['selectedScheduleId']);
+
+$stmt->execute();
+
+
+
+
+
 echo json_encode([
     "success" => true
 ]);

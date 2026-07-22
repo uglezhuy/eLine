@@ -1,6 +1,11 @@
 import StudentPage from './pages/Student/StudentPage.jsx'
 import AdminPage from './pages/Admin/AdminPage.jsx'
-import schedule from '../src/data/schedule.js'
+
+
+
+
+import { loadSchedule } from '../backend/api/requestApi.js'
+
 
 import { Routes, Route } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -8,6 +13,8 @@ import { useState, useEffect } from "react";
 function App() {
 
   const [requests, setRequests] = useState([]);
+
+  const [schedule, setSchedule] = useState([]);
 
   function loadRequests() {
     fetch("http://localhost:8888/backend/api/getRequests.php")
@@ -20,6 +27,7 @@ function App() {
 
   useEffect(() => {
     loadRequests();
+    loadSchedule(setSchedule);
   }, []);
 
 

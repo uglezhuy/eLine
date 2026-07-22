@@ -46,7 +46,7 @@ $sql = "UPDATE requests SET " . implode(", ", $setParts) . " WHERE id = :id";
 
 $stmt = $pdo->prepare($sql);
 
-// Bind every allowed field value
+// !!!!Bind every allowed field value не понял зачем и как он работает посмотреть потом!!!!
 foreach ($fields as $field => $value) {
     if (array_key_exists($field, $allowedFields)) {
         $stmt->bindValue(":$field", $value);

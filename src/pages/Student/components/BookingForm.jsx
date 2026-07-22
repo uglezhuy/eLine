@@ -61,13 +61,14 @@ function BookingForm(props) {
         setStudentTicket("");
     }
 
+
     function getUniqueDays(days) {
 
         const daysList = new Set();
         const uniqueDays = [];
 
         days.forEach((day) => {
-            const dateKey = `${day.day}-${day.month}-${day.year}`;
+            const dateKey = `${day.schedule_date}`;
 
             if (!daysList.has(dateKey)) {
                 daysList.add(dateKey);
@@ -86,7 +87,7 @@ function BookingForm(props) {
 
     //  visitDate, visitTime
 
-
+    console.log("schedule:", props.schedule);
     return (
         <>
             <div className="Cardus">
@@ -131,7 +132,8 @@ function BookingForm(props) {
                             return (
                                 <>
                                     <button onClick={() => selectedDaySet(day)}>
-                                        {day.day + "/" + day.month + "/" + day.year}
+
+                                        {day.schedule_date}
                                     </button>
                                     <br />
                                 </>
@@ -141,14 +143,21 @@ function BookingForm(props) {
 
                     {selectedDay === null ? "Дата не выбранна" :
 
-                        <> <div> Выбрана дата: {selectedDay.day + "/" + selectedDay.month + "/" + selectedDay.year}</div>
+                        <> <div> Выбрана дата: {selectedDay.schedule_date}</div>
+                            {selectedScheduleId !== null && (
+                                <div>
+                                    Выбрано время: {
+                                        props.schedule.find(item => item.id === selectedScheduleId)?.schedule_time
+                                    }
+                                </div>
+                            )}
                             <div>Выберите время:</div>
                             <div>{
 
 
                                 props.schedule.map((time) => {
 
-                                    if (time.day !== selectedDay.day || time.month !== selectedDay.month || time.year !== selectedDay.year) {
+                                    if (time.schedule_date !== selectedDay.schedule_date) {
                                         return null;
                                     }
 
@@ -162,7 +171,7 @@ function BookingForm(props) {
                                     return isBusy ? null : (
                                         <>
                                             <button onClick={() => setSelectedScheduleId(time.id)}>
-                                                {time.time + "/" + time.day + "/" + time.month + "/" + time.year}
+                                                {time.schedule_time + "/" + time.schedule_date}
                                             </button>
                                             <br />
                                         </>

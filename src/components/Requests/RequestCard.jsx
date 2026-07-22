@@ -179,11 +179,8 @@ function RequestsCard(props) {
                         <button
                             onClick={() => deleteRequest(props.request.id, props.loadRequests)}
                         >
-                            Удалить заявку
+                            Удалить заявку(из бд)
                         </button>
-
-
-
                     </>
                 }
 

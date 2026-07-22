@@ -116,3 +116,12 @@ export function updateRequestField(id, value, fieldName, onSuccess) {
   //     )
   // );
 }
+
+export function loadSchedule(setSchedule) {
+  fetch("http://localhost:8888/backend/api/getSchedule.php")
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      setSchedule(data);
+    });
+}
