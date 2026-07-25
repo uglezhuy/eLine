@@ -8,14 +8,33 @@ import Requestslist from '../../components/Requests/RequestsList.jsx'
 
 import services from '../../data/services.js'
 
-
-import { useState } from 'react'
 import RequestsCard from '../../components/Requests/RequestsList.jsx'
 
+import { useState, useEffect } from "react";
 
+import { loadSchedule } from '../../../backend/api/requestApi.js'
 
 function StudentPage(props) {
     const [selectedService, setSelectedService] = useState(null);
+
+
+    const [requests, setRequests] = useState([]);
+    const [schedule, setSchedule] = useState([]);
+
+    function loadRequests() {
+        fetch("http://localhost:8888/backend/api/getRequests.php")
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+                setRequests(data);
+            });
+    }
+
+    useEffect(() => {
+        loadRequests();
+        loadSchedule(setSchedule);
+    }, []);
+
 
     return (
         <>
@@ -43,17 +62,17 @@ function StudentPage(props) {
             <BookingForm
                 selectedService={selectedService}
 
-                requests={props.requests}
-                schedule={props.schedule}
+                requests={requests}
+                schedule={schedule}
 
-                setRequests={props.setRequests}
+                setRequests={setRequests}
                 loadRequests={props.loadRequests} //обновление запроса к php
 
             />
             <Requestslist
-                requests={props.requests}
+                requests={requests}
                 isAdmin={false}
-                schedule={props.schedule}
+                schedule={schedule}
 
 
             />

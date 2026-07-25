@@ -51,7 +51,7 @@ function RequestsCard(props) {
                 <h4>📅 Запись</h4>
                 <div><strong>Услуга:</strong> {props.request.service}</div>
                 <div><strong>ID времени:</strong> {props.request.selectedScheduleId}</div>
-                <div><strong>Дата и время:</strong> {props.schedule.filter((time) => time.id === props.request.selectedScheduleId).map((time) => time.time + " — " + time.day + "." + time.month + "." + time.year)}</div>
+                <div><strong>Дата и время:</strong> {props.schedule.filter((time) => time.id === props.request.selectedScheduleId).map((time) => time.schedule_date + " " + time.schedule_time)}</div>
 
                 <hr />
                 <h4>⚙ Работа администратора</h4>

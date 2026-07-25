@@ -3,32 +3,10 @@ import AdminPage from './pages/Admin/AdminPage.jsx'
 
 
 
-
-import { loadSchedule } from '../backend/api/requestApi.js'
-
-
 import { Routes, Route } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 function App() {
-
-  const [requests, setRequests] = useState([]);
-
-  const [schedule, setSchedule] = useState([]);
-
-  function loadRequests() {
-    fetch("http://localhost:8888/backend/api/getRequests.php")
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        setRequests(data);
-      });
-  }
-
-  useEffect(() => {
-    loadRequests();
-    loadSchedule(setSchedule);
-  }, []);
 
 
 
@@ -58,17 +36,15 @@ function App() {
       />
 
       <Route path="/student" element={<StudentPage
-        requests={requests}
-        setRequests={setRequests}
-        schedule={schedule}
-        loadRequests={loadRequests}
+
       />} />
 
       <Route path="/admin" element={<AdminPage
-        requests={requests}
-        setRequests={setRequests}
-        schedule={schedule}
-        loadRequests={loadRequests}
+
+      // requests={requests}
+      // setRequests={setRequests}
+      // schedule={schedule}
+      // loadRequests={loadRequests}
       />} />
 
     </Routes>

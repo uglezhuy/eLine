@@ -1,14 +1,39 @@
 import { Link } from "react-router-dom";
 import Requestslist from '../../components/Requests/RequestsList.jsx'
 import BottonFilter from './components/BottonFilter.jsx'
-import { useState } from 'react'
+import { useState, useEffect } from "react";
+import Schedule from '../../components/Schedules/Schedule.jsx'
+
+import ScheduleGenerator from '../../components/Schedules/ScheduleGenerator.jsx'
 
 import { changeStatus, startWork, updateRequestField } from '../../../backend/api/requestApi.js'
+
+import { loadScheduleAdmin } from '../../../backend/api/requestApi.js'
 
 
 
 
 function AdminPage(props) {
+
+    const [requests, setRequests] = useState([]);
+    const [schedule, setSchedule] = useState([]);
+    function loadRequests() {
+        fetch("http://localhost:8888/backend/api/getRequests.php")
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+                setRequests(data);
+            });
+    }
+
+    useEffect(() => {
+        loadRequests();
+        loadScheduleAdmin(setSchedule);
+    }, []);
+
+    const [selectedScheduleId, setSelectedScheduleId] = useState(null);
+    const [selectedDay, selectedDaySet] = useState(null);
+
 
     const [statusFilter, setStatusFilter] = useState("Все"); //фильтр по статусу
 
@@ -19,8 +44,8 @@ function AdminPage(props) {
 
     const filterRequests =      //filter создаёт новый массив, объекты внутри остаются теми же поэтому мы можем менять статусы
         statusFilter === "Все"
-            ? props.requests
-            : props.requests.filter(
+            ? requests
+            : requests.filter(
                 (request) => request.status === statusFilter
             );
 
@@ -65,6 +90,9 @@ function AdminPage(props) {
     console.log(filterSearchText);
     console.log(sorted);
 
+    function reloadSchedule() {// !!!доразобраться !!!! функция обертка для обновления стници 
+        loadScheduleAdmin(setSchedule);
+    }
 
     return (
 
@@ -76,6 +104,22 @@ function AdminPage(props) {
             <Link to="/student">
                 Студент
             </Link>
+
+            <ScheduleGenerator />
+
+
+            <Schedule
+                isAdmin={true}
+                requests={requests}
+                schedule={schedule}
+                loadScheduleAdmin={reloadSchedule}
+                selectedScheduleId={selectedScheduleId}
+                setSelectedScheduleId={setSelectedScheduleId}
+                selectedDay={selectedDay}
+                selectedDaySet={selectedDaySet}
+            />
+
+
 
             <h1>Администратор</h1>
             <BottonFilter
@@ -103,7 +147,7 @@ function AdminPage(props) {
                 updateRequestField={updateRequestField}
                 isAdmin={true}
                 startWork={startWork} //костыль
-                schedule={props.schedule}
+                schedule={schedule}
                 loadRequests={props.loadRequests}
 
             />

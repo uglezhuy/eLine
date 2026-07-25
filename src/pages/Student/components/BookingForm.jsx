@@ -1,6 +1,6 @@
 import './ServiceCard.css'
 import { useState } from 'react'
-
+import Schedule from '../../../components/Schedules/Schedule';
 
 
 
@@ -62,21 +62,7 @@ function BookingForm(props) {
     }
 
 
-    function getUniqueDays(days) {
 
-        const daysList = new Set();
-        const uniqueDays = [];
-
-        days.forEach((day) => {
-            const dateKey = `${day.schedule_date}`;
-
-            if (!daysList.has(dateKey)) {
-                daysList.add(dateKey);
-                uniqueDays.push(day);
-            };
-        })
-        return uniqueDays;
-    }
 
 
     const [name, setName] = useState("");
@@ -127,60 +113,17 @@ function BookingForm(props) {
 
 
                 <>
-                    <div>{
-                        getUniqueDays(props.schedule).map((day) => {
-                            return (
-                                <>
-                                    <button onClick={() => selectedDaySet(day)}>
+                    <Schedule
+                        isAdmin={false}
+                        requests={props.requests}
+                        schedule={props.schedule}
 
-                                        {day.schedule_date}
-                                    </button>
-                                    <br />
-                                </>
-                            );
-                        })}
-                    </div>
+                        selectedScheduleId={selectedScheduleId}
+                        setSelectedScheduleId={setSelectedScheduleId}
 
-                    {selectedDay === null ? "Дата не выбранна" :
-
-                        <> <div> Выбрана дата: {selectedDay.schedule_date}</div>
-                            {selectedScheduleId !== null && (
-                                <div>
-                                    Выбрано время: {
-                                        props.schedule.find(item => item.id === selectedScheduleId)?.schedule_time
-                                    }
-                                </div>
-                            )}
-                            <div>Выберите время:</div>
-                            <div>{
-
-
-                                props.schedule.map((time) => {
-
-                                    if (time.schedule_date !== selectedDay.schedule_date) {
-                                        return null;
-                                    }
-
-
-                                    const isBusy = props.requests.some(
-                                        (request) =>
-
-                                            request.selectedScheduleId === time.id
-                                    );
-                                    console.log(time.id, isBusy);
-                                    return isBusy ? null : (
-                                        <>
-                                            <button onClick={() => setSelectedScheduleId(time.id)}>
-                                                {time.schedule_time + "/" + time.schedule_date}
-                                            </button>
-                                            <br />
-                                        </>
-                                    );
-                                })}
-                            </div>
-
-                        </>
-                    }
+                        selectedDay={selectedDay}
+                        selectedDaySet={selectedDaySet}
+                    />
 
                 </>
 
