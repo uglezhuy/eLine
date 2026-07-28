@@ -104,8 +104,21 @@ function ScheduleGenerator(props) {
                 <option value="30">30 минут</option>
             </select>
 
-            <button onClick={() => addScheduleGenerator(employee_id, dateStart, dateEnd, timeStart, timeEnd, interval, workingDays)}>Сгенерировать расписание</button>
-        </>
+            <button
+
+                onClick={() => {
+
+                    addScheduleGenerator(employee_id, dateStart, dateEnd, timeStart, timeEnd, interval, workingDays).then(() => {
+                        alert("расписание  создано");
+                    })
+                        .catch((err) => {
+                            console.error(err);
+                            alert("ошибкасоздании расписания");
+                        });
+                }}
+            >
+                Сгенерировать расписание
+            </button>        </>
     )
 }
 export default ScheduleGenerator

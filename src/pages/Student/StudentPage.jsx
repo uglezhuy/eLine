@@ -14,6 +14,7 @@ import { useState, useEffect } from "react";
 
 import { loadSchedule } from '../../../backend/api/requestApi.js'
 
+import { loadRequests } from '../../../backend/api/requestApi.js'
 function StudentPage(props) {
     const [selectedService, setSelectedService] = useState(null);
 
@@ -21,17 +22,10 @@ function StudentPage(props) {
     const [requests, setRequests] = useState([]);
     const [schedule, setSchedule] = useState([]);
 
-    function loadRequests() {
-        fetch("http://localhost:8888/backend/api/getRequests.php")
-            .then((response) => response.json())
-            .then((data) => {
-                console.log(data);
-                setRequests(data);
-            });
-    }
+
 
     useEffect(() => {
-        loadRequests();
+        loadRequests(setRequests);
         loadSchedule(setSchedule);
     }, []);
 

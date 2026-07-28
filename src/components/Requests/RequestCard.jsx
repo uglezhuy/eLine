@@ -24,9 +24,7 @@ function RequestsCard(props) {
     }
 
 
-    console.log("RequestCard props:", props);
 
-    console.log("RequestCard schedule:", props.schedule);
 
     return (
         <>
@@ -88,7 +86,7 @@ function RequestsCard(props) {
                             />
 
                             <button onClick={() => {
-                                props.updateRequestField(props.request.id, commentAdmin, "commentAdmin", props.loadRequests);
+                                props.updateRequestField(props.request.id, commentAdmin, "commentAdmin", props.refreshRequests);
                                 // props.updateRequestField(props.request.id, nameAdminInWork, "nameAdminInWork");
                             }
                             } >Добавить комментрий</button>
@@ -110,12 +108,12 @@ function RequestsCard(props) {
                         <>
                             <br />
                             <button
-                                onClick={() => props.changeStatus(props.request.id, "Подтверждено", props.loadRequests)}
+                                onClick={() => props.changeStatus(props.request.id, "Подтверждено", props.refreshRequests)}
                             >
                                 Подтвердить
                             </button>
                             <button
-                                onClick={() => props.changeStatus(props.request.id, "Отклонено", props.loadRequests)}
+                                onClick={() => props.changeStatus(props.request.id, "Отклонено", props.refreshRequests)}
                             >
                                 Отклонить
                             </button>
@@ -128,7 +126,7 @@ function RequestsCard(props) {
                         <>
                             <br />
                             <button
-                                onClick={() => props.startWork(props.request.id, nameAdminInWork, props.loadRequests)} //костыль
+                                onClick={() => props.startWork(props.request.id, nameAdminInWork, props.refreshRequests)} //костыль
                             >
                                 Взять в работу
                             </button>
@@ -144,7 +142,7 @@ function RequestsCard(props) {
                         <>
                             <br />
                             <button
-                                onClick={() => props.changeStatus(props.request.id, "Готово к выдаче", props.loadRequests)}
+                                onClick={() => props.changeStatus(props.request.id, "Готово к выдаче", props.refreshRequests)}
                             >
                                 Готово к выдаче
                             </button>
@@ -162,7 +160,7 @@ function RequestsCard(props) {
                         <>
                             <br />
                             <button
-                                onClick={() => props.changeStatus(props.request.id, "Завершено", props.loadRequests)}
+                                onClick={() => props.changeStatus(props.request.id, "Завершено", props.refreshRequests)}
                             >
                                 Завершить
                             </button>
@@ -177,7 +175,7 @@ function RequestsCard(props) {
                     <>
                         <br />
                         <button
-                            onClick={() => deleteRequest(props.request.id, props.loadRequests)}
+                            onClick={() => deleteRequest(props.request.id, props.refreshRequests)}
                         >
                             Удалить заявку(из бд)
                         </button>

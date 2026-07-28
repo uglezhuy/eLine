@@ -10,7 +10,6 @@ export function deleteRequest(id, onSuccess) {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
       if (data.success && onSuccess) {
         onSuccess();
       }
@@ -33,7 +32,6 @@ export function changeStatus(id, newStatus, onSuccess) {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
       if (data.success && onSuccess) {
         onSuccess();
       }
@@ -68,7 +66,6 @@ export function startWork(id, nameAdmin, onSuccess) {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
       if (data.success && onSuccess) {
         onSuccess();
       }
@@ -102,26 +99,16 @@ export function updateRequestField(id, value, fieldName, onSuccess) {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
       if (data.success && onSuccess) {
         onSuccess();
       }
     });
-
-  // props.setRequests(prevRequests =>
-  //     prevRequests.map((r) =>
-  //         r.id === id
-  //             ? { ...r, [fieldName]: value }
-  //             : r
-  //     )
-  // );
 }
 
-export function loadRequests() {
+export function loadRequests(setRequests) {
   fetch("http://localhost:8888/backend/api/getRequests.php")
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
       setRequests(data);
     });
 }
@@ -130,15 +117,14 @@ export function loadSchedule(setSchedule) {
   fetch("http://localhost:8888/backend/api/getSchedule.php")
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
       setSchedule(data);
     });
 }
+
 export function loadScheduleAdmin(setSchedule) {
   fetch("http://localhost:8888/backend/api/getScheduleAdmin.php")
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
       setSchedule(data);
     });
 }
@@ -172,7 +158,7 @@ export function addScheduleGenerator(
   interval,
   workingDays,
 ) {
-  fetch("http://localhost:8888/backend/api/addScheduleGenerator.php", {
+  return fetch("http://localhost:8888/backend/api/addScheduleGenerator.php", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -190,5 +176,38 @@ export function addScheduleGenerator(
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
+    });
+}
+
+export function handleSubmit(
+  selectedService,
+  name,
+  studentTicket,
+  phone,
+  commentStudent,
+  selectedScheduleId,
+  onSuccess,
+) {
+  fetch("http://localhost:8888/backend/api/addRequest.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      service: selectedService.name,
+      name: name,
+      studentTicket: studentTicket,
+      phone: phone,
+      commentStudent: commentStudent,
+      selectedScheduleId: selectedScheduleId,
+      status: "Ожидает подтверждения",
+    }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      if (data.success && onSuccess) {
+        onSuccess();
+      }
     });
 }

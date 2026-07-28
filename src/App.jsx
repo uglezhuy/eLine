@@ -41,10 +41,7 @@ function App() {
 
       <Route path="/admin" element={<AdminPage
 
-      // requests={requests}
-      // setRequests={setRequests}
-      // schedule={schedule}
-      // loadRequests={loadRequests}
+
       />} />
 
     </Routes>

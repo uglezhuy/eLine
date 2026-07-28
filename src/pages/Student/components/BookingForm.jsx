@@ -2,9 +2,9 @@ import './ServiceCard.css'
 import { useState } from 'react'
 import Schedule from '../../../components/Schedules/Schedule';
 
+import { loadRequests } from '../../../../backend/api/requestApi.js'
 
-
-
+import { handleSubmit } from '../../../../backend/api/requestApi.js'
 
 
 
@@ -18,48 +18,7 @@ function BookingForm(props) {
     const [selectedDay, selectedDaySet] = useState(null);
 
 
-    function handleSubmit() {
-        console.log("Данные о пользователе получены");
-        console.log(name);
-        console.log(phone);
-        console.log(props.selectedService);
 
-        //props.setRequests([...props.requests, { id: props.requests.length + 1, service: props.selectedService.name, name: name, studentTicket: studentTicket, phone: phone, commentStudent: commentStudent, selectedScheduleId: selectedScheduleId, status: "Ожидает подтверждения", createdAt: new Date().toLocaleString("ru-RU") }])
-
-        // id: props.requests.length + 1,    createdAt: new Date().toLocaleString("ru-RU") }])
-
-
-
-        fetch("http://localhost:8888/backend/api/addRequest.php", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                service: props.selectedService.name,
-                name: name,
-                studentTicket: studentTicket,
-                phone: phone,
-                commentStudent: commentStudent,
-                selectedScheduleId: selectedScheduleId,
-                status: "Ожидает подтверждения"
-            })
-
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                console.log(data);
-                if (data.success) {
-                    props.loadRequests();
-                }
-            });
-
-
-        setName("");
-        setPhone("");
-        setcommentStudent("")
-        setStudentTicket("");
-    }
 
 
 
@@ -73,7 +32,6 @@ function BookingForm(props) {
 
     //  visitDate, visitTime
 
-    console.log("schedule:", props.schedule);
     return (
         <>
             <div className="Cardus">
@@ -128,7 +86,35 @@ function BookingForm(props) {
                 </>
 
                 <br />
-                {props.selectedService === null ? "" : <div>    <button onClick={() => handleSubmit()} >Записаться</button></div>}
+                {props.selectedService === null ? "" : <div>    <button onClick={() => handleSubmit(
+
+                    props.selectedService,
+
+                    name,
+
+                    studentTicket,
+
+                    phone,
+
+                    commentStudent,
+
+                    selectedScheduleId,
+
+                    () => {
+
+                        loadRequests(props.setRequests);
+
+                        setName("");
+
+                        setPhone("");
+
+                        setcommentStudent("");
+
+                        setStudentTicket("");
+
+                    }
+
+                )} >Записаться</button></div>}
             </div>
         </>
     );
@@ -146,5 +132,4 @@ function BookingForm(props) {
 
 
 export default BookingForm
-
 

@@ -10,24 +10,17 @@ import { changeStatus, startWork, updateRequestField } from '../../../backend/ap
 
 import { loadScheduleAdmin } from '../../../backend/api/requestApi.js'
 
-
+import { loadRequests } from '../../../backend/api/requestApi.js'
 
 
 function AdminPage(props) {
 
     const [requests, setRequests] = useState([]);
     const [schedule, setSchedule] = useState([]);
-    function loadRequests() {
-        fetch("http://localhost:8888/backend/api/getRequests.php")
-            .then((response) => response.json())
-            .then((data) => {
-                console.log(data);
-                setRequests(data);
-            });
-    }
+
 
     useEffect(() => {
-        loadRequests();
+        loadRequests(setRequests);
         loadScheduleAdmin(setSchedule);
     }, []);
 
@@ -83,12 +76,7 @@ function AdminPage(props) {
 
 
 
-    console.log(statusFilter);
 
-    console.log(filterRequests);
-
-    console.log(filterSearchText);
-    console.log(sorted);
 
     function reloadSchedule() {// !!!доразобраться !!!! функция обертка для обновления стници 
         loadScheduleAdmin(setSchedule);
@@ -148,7 +136,7 @@ function AdminPage(props) {
                 isAdmin={true}
                 startWork={startWork} //костыль
                 schedule={schedule}
-                loadRequests={props.loadRequests}
+                refreshRequests={() => loadRequests(setRequests)}
 
             />
         </>
