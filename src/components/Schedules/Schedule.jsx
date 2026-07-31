@@ -72,9 +72,7 @@ function Schedule(props) {
                                 }
 
 
-                                const isBusy = props.requests.some(
-                                    (request) => request.selectedScheduleId === time.id
-                                );
+                                const isBusy = time.is_busy === 1;
 
                                 if (!props.isAdmin) {
                                     return isBusy ? null : (

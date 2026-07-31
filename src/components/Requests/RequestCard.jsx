@@ -1,9 +1,14 @@
 import { useState } from 'react'
 import { deleteRequest } from '../../../backend/api/requestApi.js'
 
+import MoveRequest from './MoveRequest.jsx'
+
 function RequestsCard(props) {
     const [commentAdmin, setcommentAdmin] = useState("");
     const [nameAdminInWork, setNameAdmin] = useState("");
+
+
+    const [MoveMode, setMoveMode] = useState(false);
 
 
     function getStatusEmoji(status) {
@@ -30,6 +35,9 @@ function RequestsCard(props) {
         <>
 
             <br />
+
+
+
             <div className="Cardus">
                 <h3>📄 Информация о заявке</h3>
 
@@ -168,7 +176,17 @@ function RequestsCard(props) {
                     )
 
                 }
-
+                {
+                    props.isAdmin &&
+                    <>
+                        <br />
+                        <button
+                            onClick={() => setMoveMode(true)}
+                        >
+                            Выбранть другое время(перенести)
+                        </button>
+                    </>
+                }
 
                 {
                     props.isAdmin &&
@@ -183,8 +201,20 @@ function RequestsCard(props) {
                 }
 
             </div>
+            {
+                props.isAdmin && MoveMode &&
+                <>
+                    <MoveRequest
+                        setMoveMode={setMoveMode}
+                        request={props.request}
+                        refreshRequests={props.refreshRequests}
+                        schedule={props.schedule}
+                        setSchedule={props.setSchedule}
+                    />
 
 
+                </>
+            }
         </>
     )
 }

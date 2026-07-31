@@ -87,32 +87,20 @@ function BookingForm(props) {
 
                 <br />
                 {props.selectedService === null ? "" : <div>    <button onClick={() => handleSubmit(
-
                     props.selectedService,
-
                     name,
-
                     studentTicket,
-
                     phone,
-
                     commentStudent,
-
                     selectedScheduleId,
-
                     () => {
-
-                        loadRequests(props.setRequests);
-
+                        props.loadRequests();
+                        props.loadSchedule();
                         setName("");
-
                         setPhone("");
-
                         setcommentStudent("");
-
                         setStudentTicket("");
-
-                    }
+                    },
 
                 )} >Записаться</button></div>}
             </div>

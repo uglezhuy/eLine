@@ -78,9 +78,7 @@ function AdminPage(props) {
 
 
 
-    function reloadSchedule() {// !!!доразобраться !!!! функция обертка для обновления стници 
-        loadScheduleAdmin(setSchedule);
-    }
+
 
     return (
 
@@ -100,7 +98,7 @@ function AdminPage(props) {
                 isAdmin={true}
                 requests={requests}
                 schedule={schedule}
-                loadScheduleAdmin={reloadSchedule}
+                loadScheduleAdmin={() => loadScheduleAdmin(setSchedule)}
                 selectedScheduleId={selectedScheduleId}
                 setSelectedScheduleId={setSelectedScheduleId}
                 selectedDay={selectedDay}
@@ -137,6 +135,7 @@ function AdminPage(props) {
                 startWork={startWork} //костыль
                 schedule={schedule}
                 refreshRequests={() => loadRequests(setRequests)}
+                setSchedule={setSchedule}
 
             />
         </>

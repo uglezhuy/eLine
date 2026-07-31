@@ -70,18 +70,6 @@ export function startWork(id, nameAdmin, onSuccess) {
         onSuccess();
       }
     });
-
-  // props.setRequests(
-  //     props.requests.map((r) =>
-  //         r.id === id
-  //             ? {
-  //                 ...r,
-  //                 status: "В обработке",
-  //                 nameAdminInWork: nameAdmin
-  //             }
-  //             : r
-  //     )
-  // );
 }
 
 export function updateRequestField(id, value, fieldName, onSuccess) {
@@ -208,6 +196,39 @@ export function handleSubmit(
       console.log(data);
       if (data.success && onSuccess) {
         onSuccess();
+      }
+    });
+}
+
+export function moveRequest(
+  requestId,
+  selectedScheduleId,
+  oldSelectedScheduleId,
+  onSuccess,
+  onSuccessSetSchedule,
+) {
+  fetch("http://localhost:8888/backend/api/moveRequest.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      newSelectedScheduleId: selectedScheduleId,
+      oldSelectedScheduleId: oldSelectedScheduleId,
+      requestId: requestId,
+    }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      if (data.success) {
+        if (onSuccess) {
+          onSuccess();
+        }
+
+        if (onSuccessSetSchedule) {
+          onSuccessSetSchedule();
+        }
       }
     });
 }

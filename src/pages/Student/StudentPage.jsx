@@ -59,9 +59,8 @@ function StudentPage(props) {
                 requests={requests}
                 schedule={schedule}
 
-                setRequests={setRequests}
-                loadRequests={props.loadRequests} //обновление запроса к php
-
+                loadRequests={() => loadRequests(setRequests)}
+                loadSchedule={() => loadSchedule(setSchedule)}
             />
             <Requestslist
                 requests={requests}
