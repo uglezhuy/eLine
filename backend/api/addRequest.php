@@ -34,6 +34,18 @@ $stmt->bindParam(':id', $data['selectedScheduleId']);
 
 $stmt->execute();
 
+$id = $pdo->lastInsertId(); //  id последнего добавленного запроса
+
+//добавление Sequest_history
+$sql3 = "INSERT INTO request_history (request_id, action,new_value)
+VALUES (:id, :action, :new_value)";
+$stmt3 = $pdo->prepare($sql3);
+$action = "CREATE";
+$stmt3->bindParam(':id', $id);
+$stmt3->bindParam(':action', $action);
+$stmt3->bindValue(':new_value', "Создана заявка");
+$stmt3->execute();
+
 
 
 

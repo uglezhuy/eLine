@@ -1,4 +1,4 @@
-export function deleteRequest(id, onSuccess) {
+export function deleteRequest(id, onSuccess, CommentAdminForHistory) {
   fetch("http://localhost:8888/backend/api/deleteRequest.php", {
     method: "POST",
     headers: {
@@ -6,6 +6,7 @@ export function deleteRequest(id, onSuccess) {
     },
     body: JSON.stringify({
       id: id,
+      CommentAdminForHistory: CommentAdminForHistory,
     }),
   })
     .then((response) => response.json())

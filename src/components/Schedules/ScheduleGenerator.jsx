@@ -37,6 +37,7 @@ function ScheduleGenerator(props) {
 
     return (
         <>
+
             <div>Генерация расписания:</div>
 
 
@@ -118,7 +119,9 @@ function ScheduleGenerator(props) {
                 }}
             >
                 Сгенерировать расписание
-            </button>        </>
+            </button>
+
+        </>
     )
 }
 export default ScheduleGenerator

@@ -9,7 +9,7 @@ import { useState } from 'react'
 function RequestsList(props) {
     return (
         <>
-            <br />
+
             <h4>Заявки:</h4>
             {props.requests.map((request, index) => (
                 <RequestsCard

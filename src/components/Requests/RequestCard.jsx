@@ -7,6 +7,8 @@ function RequestsCard(props) {
     const [commentAdmin, setcommentAdmin] = useState("");
     const [nameAdminInWork, setNameAdmin] = useState("");
 
+    const [CommentAdminForHistory, setCommentAdminForHistory] = useState("");
+
 
     const [MoveMode, setMoveMode] = useState(false);
 
@@ -34,7 +36,7 @@ function RequestsCard(props) {
     return (
         <>
 
-            <br />
+
 
 
 
@@ -193,14 +195,33 @@ function RequestsCard(props) {
                     <>
                         <br />
                         <button
-                            onClick={() => deleteRequest(props.request.id, props.refreshRequests)}
+                            onClick={() => {
+                                deleteRequest(props.request.id, props.refreshRequests, CommentAdminForHistory);
+                                setCommentAdminForHistory("");
+                            }}
                         >
                             Удалить заявку(из бд)
                         </button>
                     </>
                 }
 
-            </div>
+                {
+                    props.isAdmin && (
+                        <>
+                            <div>комментарий к истрии заявки(опционально):</div>
+
+                            <input
+                                type="text" f
+                                value={CommentAdminForHistory}
+                                onChange={(e) => setCommentAdminForHistory(e.target.value)}
+                            />
+
+
+                        </>
+                    )
+                }
+
+            </div >
             {
                 props.isAdmin && MoveMode &&
                 <>
@@ -215,6 +236,32 @@ function RequestsCard(props) {
 
                 </>
             }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         </>
     )
 }

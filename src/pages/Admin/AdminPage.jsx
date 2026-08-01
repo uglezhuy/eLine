@@ -6,6 +6,8 @@ import Schedule from '../../components/Schedules/Schedule.jsx'
 
 import ScheduleGenerator from '../../components/Schedules/ScheduleGenerator.jsx'
 
+import Request_history from '../../components/Sequest_history/Sequest_history.jsx'
+
 import { changeStatus, startWork, updateRequestField } from '../../../backend/api/requestApi.js'
 
 import { loadScheduleAdmin } from '../../../backend/api/requestApi.js'
@@ -91,23 +93,30 @@ function AdminPage(props) {
                 Студент
             </Link>
 
-            <ScheduleGenerator />
+            <h1>Администратор</h1>
+            <div className="Cardus">
+                <ScheduleGenerator
+
+                />
+
+                <Schedule
+                    isAdmin={true}
+                    requests={requests}
+                    schedule={schedule}
+                    loadScheduleAdmin={() => loadScheduleAdmin(setSchedule)}
+                    selectedScheduleId={selectedScheduleId}
+                    setSelectedScheduleId={setSelectedScheduleId}
+                    selectedDay={selectedDay}
+                    selectedDaySet={selectedDaySet}
+                />
+            </div>
 
 
-            <Schedule
-                isAdmin={true}
+
+            <Request_history
                 requests={requests}
-                schedule={schedule}
-                loadScheduleAdmin={() => loadScheduleAdmin(setSchedule)}
-                selectedScheduleId={selectedScheduleId}
-                setSelectedScheduleId={setSelectedScheduleId}
-                selectedDay={selectedDay}
-                selectedDaySet={selectedDaySet}
             />
 
-
-
-            <h1>Администратор</h1>
             <BottonFilter
                 statusFilter={statusFilter}
                 setStatusFilter={setStatusFilter}
@@ -123,9 +132,8 @@ function AdminPage(props) {
             />
 
 
-            <br />
-            <div>Заявки после фильтрации:</div>
-            <br />
+
+
             <Requestslist
                 requests={sorted}
 
