@@ -37,20 +37,9 @@ export function changeStatus(id, newStatus, onSuccess) {
         onSuccess();
       }
     });
-
-  // props.setRequests(
-  //     props.requests.map((r) =>
-  //         r.id === id
-  //             ? {
-  //                 ...r, status: newStatus,
-  //                 statusChangedAt: new Date().toLocaleString("ru-RU")
-  //             }
-  //             : r
-  //     )
-  // );
 }
 
-export function startWork(id, nameAdmin, onSuccess) {
+export function startWork(id, nameAdmin, onSuccess, CommentAdminForHistory) {
   fetch("http://localhost:8888/backend/api/updateRequest.php", {
     method: "POST",
     headers: {
@@ -58,6 +47,7 @@ export function startWork(id, nameAdmin, onSuccess) {
     },
     body: JSON.stringify({
       id: id,
+      CommentAdminForHistory: CommentAdminForHistory,
       fields: {
         status: "В обработке",
         nameAdminInWork: nameAdmin,

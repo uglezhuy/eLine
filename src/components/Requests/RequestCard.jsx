@@ -97,7 +97,6 @@ function RequestsCard(props) {
 
                             <button onClick={() => {
                                 props.updateRequestField(props.request.id, commentAdmin, "commentAdmin", props.refreshRequests);
-                                // props.updateRequestField(props.request.id, nameAdminInWork, "nameAdminInWork");
                             }
                             } >Добавить комментрий</button>
 
@@ -136,7 +135,7 @@ function RequestsCard(props) {
                         <>
                             <br />
                             <button
-                                onClick={() => props.startWork(props.request.id, nameAdminInWork, props.refreshRequests)} //костыль
+                                onClick={() => { props.startWork(props.request.id, nameAdminInWork, props.refreshRequests, CommentAdminForHistory); setCommentAdminForHistory(""); }} //костыль
                             >
                                 Взять в работу
                             </button>

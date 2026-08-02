@@ -57,6 +57,28 @@ $stmt->bindValue(':id', $id, PDO::PARAM_INT);
 $stmt->execute();
 
 
+
+
+
+
+
+//добавление Sequest_history
+$CommentAdminForHistory = $data["CommentAdminForHistory"] ?? null;
+$sql3 = "INSERT INTO request_history
+(request_id, action, new_value, comment, changed_by_name)
+VALUES
+(:id, :action, :new_value, :comment, :changed_by_name)";
+$stmt3 = $pdo->prepare($sql3);
+$action = "START_WORK";
+$stmt3->bindValue(':id', $id, PDO::PARAM_INT);
+$stmt3->bindValue(':action', $action);
+$stmt3->bindValue(':new_value', $fields["status"]);
+$stmt3->bindValue(':comment', $CommentAdminForHistory);
+$stmt3->bindValue(':changed_by_name', $fields["nameAdminInWork"]);
+$stmt3->execute();
+
+
+
 echo json_encode([
     "success" => true
 ]);
