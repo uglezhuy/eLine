@@ -34,8 +34,16 @@ $stmt->bindParam(':id', $data['selectedScheduleId']);
 
 $stmt->execute();
 
-$id = $pdo->lastInsertId(); //  id последнего добавленного запроса
+// это эиспользовать не получилось доразобрать так делат ьправльнее например если однвоременно еще кто то добавит заявку $id = $pdo->lastInsertId(); //  id последнего добавленного запроса
+$sqlId = "SELECT id
+          FROM requests
+          ORDER BY id DESC
+          LIMIT 1";
+$stmtId = $pdo->prepare($sqlId);
 
+$stmtId->execute();
+
+$id = $stmtId->fetchColumn();
 //добавление Sequest_history
 $sql3 = "INSERT INTO request_history (request_id, action,new_value)
 VALUES (:id, :action, :new_value)";

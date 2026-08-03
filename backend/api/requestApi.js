@@ -17,7 +17,7 @@ export function deleteRequest(id, onSuccess, CommentAdminForHistory) {
     });
 }
 
-export function changeStatus(id, newStatus, onSuccess) {
+export function changeStatus(id, newStatus, onSuccess, CommentAdminForHistory) {
   fetch("http://localhost:8888/backend/api/updateRequest.php", {
     method: "POST",
     headers: {
@@ -25,6 +25,7 @@ export function changeStatus(id, newStatus, onSuccess) {
     },
     body: JSON.stringify({
       id: id,
+      CommentAdminForHistory: CommentAdminForHistory,
       fields: {
         status: newStatus,
         statusChangedAt: new Date().toLocaleString("sv-SE").replace(" ", " "),
@@ -221,5 +222,21 @@ export function moveRequest(
           onSuccessSetSchedule();
         }
       }
+    });
+}
+
+export function getRequestHistoryByID(RequestId, setRequestHistory) {
+  fetch("http://localhost:8888/backend/api/getRequestHistoryByID.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      RequestId: RequestId,
+    }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      setRequestHistory(data);
     });
 }

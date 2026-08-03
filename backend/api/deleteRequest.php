@@ -38,13 +38,14 @@ $stmt2->bindParam(':id', $request['selected_schedule_id']);
 $stmt2->execute();
 
 //добавление Sequest_history
-$sql3 = "INSERT INTO request_history (request_id, action, comment)
-VALUES (:id, :action, :comment)";
+$sql3 = "INSERT INTO request_history (request_id, action, comment, new_value)
+VALUES (:id, :action, :comment, :new_value)";
 $stmt3 = $pdo->prepare($sql3);
 $action = "DELETE";
 $stmt3->bindParam(':id', $id);
 $stmt3->bindParam(':action', $action);
 $stmt3->bindParam(':comment', $CommentAdminForHistory);
+$stmt3->bindValue(':new_value', "Удалено");
 $stmt3->execute();
 
 

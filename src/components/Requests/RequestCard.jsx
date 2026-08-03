@@ -117,12 +117,18 @@ function RequestsCard(props) {
                         <>
                             <br />
                             <button
-                                onClick={() => props.changeStatus(props.request.id, "Подтверждено", props.refreshRequests)}
+                                onClick={() => {
+                                    props.changeStatus(props.request.id, "Подтверждено", props.refreshRequests, CommentAdminForHistory);
+                                    setCommentAdminForHistory("");
+                                }}
                             >
                                 Подтвердить
                             </button>
                             <button
-                                onClick={() => props.changeStatus(props.request.id, "Отклонено", props.refreshRequests)}
+                                onClick={() => {
+                                    props.changeStatus(props.request.id, "Отклонено", props.refreshRequests, CommentAdminForHistory);
+                                    setCommentAdminForHistory("");
+                                }}
                             >
                                 Отклонить
                             </button>
@@ -135,7 +141,10 @@ function RequestsCard(props) {
                         <>
                             <br />
                             <button
-                                onClick={() => { props.startWork(props.request.id, nameAdminInWork, props.refreshRequests, CommentAdminForHistory); setCommentAdminForHistory(""); }} //костыль
+                                onClick={() => {
+                                    props.startWork(props.request.id, nameAdminInWork, props.refreshRequests, CommentAdminForHistory);
+                                    setCommentAdminForHistory("");
+                                }} //костыль
                             >
                                 Взять в работу
                             </button>
@@ -151,7 +160,10 @@ function RequestsCard(props) {
                         <>
                             <br />
                             <button
-                                onClick={() => props.changeStatus(props.request.id, "Готово к выдаче", props.refreshRequests)}
+                                onClick={() => {
+                                    props.changeStatus(props.request.id, "Готово к выдаче", props.refreshRequests, CommentAdminForHistory);
+                                    setCommentAdminForHistory("");
+                                }}
                             >
                                 Готово к выдаче
                             </button>
@@ -169,7 +181,10 @@ function RequestsCard(props) {
                         <>
                             <br />
                             <button
-                                onClick={() => props.changeStatus(props.request.id, "Завершено", props.refreshRequests)}
+                                onClick={() => {
+                                    props.changeStatus(props.request.id, "Завершено", props.refreshRequests, CommentAdminForHistory);
+                                    setCommentAdminForHistory("");
+                                }}
                             >
                                 Завершить
                             </button>

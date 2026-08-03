@@ -74,7 +74,26 @@ $stmt3->bindValue(':id', $id, PDO::PARAM_INT);
 $stmt3->bindValue(':action', $action);
 $stmt3->bindValue(':new_value', $fields["status"]);
 $stmt3->bindValue(':comment', $CommentAdminForHistory);
-$stmt3->bindValue(':changed_by_name', $fields["nameAdminInWork"]);
+
+$changedByName = $fields["nameAdminInWork"] ?? null;
+$stmt3->bindValue(':changed_by_name', $changedByName);
+
+
+
+
+if (isset($fields["nameAdminInWork"])) {
+    $action = "START_WORK";
+} elseif (isset($fields["status"])) {
+    $action = "STATUS_CHANGE";
+} elseif (isset($fields["commentAdmin"])) {
+    $action = "COMMENT_CHANGE";
+} else {
+    $action = "UPDATE";
+}
+
+$stmt3->bindValue(':action', $action);
+
+
 $stmt3->execute();
 
 
