@@ -92,7 +92,7 @@ function AdminPage(props) {
             <Link to="/student">
                 Студент
             </Link>
-
+            <hr />
             <h1>Администратор</h1>
             <div className="Cardus">
                 <ScheduleGenerator
@@ -110,13 +110,13 @@ function AdminPage(props) {
                     selectedDaySet={selectedDaySet}
                 />
             </div>
-
+            <hr />
 
 
             <Request_history
                 requests={requests}
             />
-
+            <hr />
             <BottonFilter
                 statusFilter={statusFilter}
                 setStatusFilter={setStatusFilter}

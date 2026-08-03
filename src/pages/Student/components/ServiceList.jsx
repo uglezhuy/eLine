@@ -1,9 +1,25 @@
 import './ServiceCard.css'
 import CardUsluga from '../components/ServiceCard'
+import { useEffect, useState } from 'react'
+import { loadServices } from '../../../../backend/api/requestApi.js'
 
 function CardUslugaList(props) {
+
+
+    const [services, setServices] = useState([])
+
+
+    useEffect(() => {
+        loadServices(setServices);
+    }, []);
+
+    useEffect(() => {
+        console.log("Сервисы:", services);
+    }, [services]);
+
+
     return (<>
-        {props.services.map((service) => {
+        {services.map((service) => {
             return (
                 <CardUsluga
                     key={service.id}
@@ -13,6 +29,7 @@ function CardUslugaList(props) {
             )
         }
         )}
+        <hr />
     </>
     );
 }

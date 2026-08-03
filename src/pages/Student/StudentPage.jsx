@@ -6,7 +6,6 @@ import CardList from './components/ServiceList.jsx'
 import BookingForm from './components/BookingForm.jsx'
 import Requestslist from '../../components/Requests/RequestsList.jsx'
 
-import services from '../../data/services.js'
 
 import RequestsCard from '../../components/Requests/RequestsList.jsx'
 
@@ -39,7 +38,7 @@ function StudentPage(props) {
             <Link to="/admin">
                 Администратор
             </Link>
-
+            <hr />
 
             <h1>Студент</h1>
             <h2>  Доступные услуги</h2>
@@ -47,7 +46,6 @@ function StudentPage(props) {
 
 
             <CardList
-                services={services}
                 selectedService={selectedService}
                 setSelectedService={setSelectedService}
 
@@ -62,6 +60,7 @@ function StudentPage(props) {
                 loadRequests={() => loadRequests(setRequests)}
                 loadSchedule={() => loadSchedule(setSchedule)}
             />
+            <hr />
             <Requestslist
                 requests={requests}
                 isAdmin={false}

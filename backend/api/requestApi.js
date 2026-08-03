@@ -240,3 +240,11 @@ export function getRequestHistoryByID(RequestId, setRequestHistory) {
       setRequestHistory(data);
     });
 }
+
+export function loadServices(setServices) {
+  fetch("http://localhost:8888/backend/api/getServices.php")
+    .then((response) => response.json())
+    .then((data) => {
+      setServices(data);
+    });
+}
