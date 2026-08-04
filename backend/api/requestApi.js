@@ -248,3 +248,43 @@ export function loadServices(setServices) {
       setServices(data);
     });
 }
+
+export function loadUser(roleID, setPreviewUser) {
+  fetch("http://localhost:8888/backend/api/getUser.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      roleID: roleID,
+    }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      setPreviewUser(data);
+    });
+}
+
+export function loginDemo(roleID) {
+  return fetch("http://localhost:8888/backend/api/loginDemo.php", {
+    credentials: "include",
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      roleID: roleID,
+    }),
+  }).then((response) => response.json());
+}
+
+export function loadCurrentUser(setUser) {
+  return fetch("http://localhost:8888/backend/api/getCurrentUser.php", {
+    credentials: "include",
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      setUser(data);
+      return data;
+    });
+}
