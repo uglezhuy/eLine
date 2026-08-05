@@ -14,6 +14,8 @@ import { useState, useEffect } from "react";
 import { loadSchedule } from '../../../backend/api/requestApi.js'
 
 import { loadRequests } from '../../../backend/api/requestApi.js'
+
+import { loadCurrentUser } from '../../../backend/api/requestApi.js'
 function StudentPage(props) {
     const [selectedService, setSelectedService] = useState(null);
 
@@ -21,12 +23,42 @@ function StudentPage(props) {
     const [requests, setRequests] = useState([]);
     const [schedule, setSchedule] = useState([]);
 
+    const [userType, setUserType] = useState(null);
+
+    useEffect(() => {
+        loadCurrentUser(setUserType)
+
+    }, []);
 
 
     useEffect(() => {
         loadRequests(setRequests);
         loadSchedule(setSchedule);
     }, []);
+
+
+
+
+    if (!userType) {
+        return (
+            <>
+                <div>Вы не авторизованы</div>
+                <Link to="/">На главную</Link>
+            </>
+        );
+    }
+    if (
+        userType.role !== "employee" &&
+        userType.role !== "admin" &&
+        userType.role !== "student"
+    ) {
+        return (
+            <>
+                <div>У вас нет доступа</div>
+                <Link to="/">На главную</Link>
+            </>
+        );
+    }
 
 
     return (

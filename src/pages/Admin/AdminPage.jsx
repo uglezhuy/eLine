@@ -14,11 +14,19 @@ import { loadScheduleAdmin } from '../../../backend/api/requestApi.js'
 
 import { loadRequests } from '../../../backend/api/requestApi.js'
 
+import { loadCurrentUser } from '../../../backend/api/requestApi.js'
 
 function AdminPage(props) {
 
     const [requests, setRequests] = useState([]);
     const [schedule, setSchedule] = useState([]);
+
+    const [userType, setUserType] = useState(null);
+
+    useEffect(() => {
+        loadCurrentUser(setUserType)
+
+    }, []);
 
 
     useEffect(() => {
@@ -81,10 +89,29 @@ function AdminPage(props) {
 
 
 
-
+    if (!userType) {
+        return (
+            <>
+                <div>Вы не авторизованы</div>
+                <Link to="/">На главную</Link>
+            </>
+        );
+    }
+    if (
+        userType.role !== "employee" &&
+        userType.role !== "admin"
+    ) {
+        return (
+            <>
+                <div>У вас нет доступа</div>
+                <Link to="/">На главную</Link>
+            </>
+        );
+    }
     return (
 
         <>
+            {console.log(userType)}
             <Link to="/">
                 На главную
             </Link>

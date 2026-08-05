@@ -16,10 +16,11 @@ export function deleteRequest(id, onSuccess, CommentAdminForHistory) {
       }
     });
 }
-
+//
 export function changeStatus(id, newStatus, onSuccess, CommentAdminForHistory) {
   fetch("http://localhost:8888/backend/api/updateRequest.php", {
     method: "POST",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
@@ -39,10 +40,11 @@ export function changeStatus(id, newStatus, onSuccess, CommentAdminForHistory) {
       }
     });
 }
-
+//
 export function startWork(id, nameAdmin, onSuccess, CommentAdminForHistory) {
   fetch("http://localhost:8888/backend/api/updateRequest.php", {
     method: "POST",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
@@ -63,10 +65,11 @@ export function startWork(id, nameAdmin, onSuccess, CommentAdminForHistory) {
       }
     });
 }
-
+//
 export function updateRequestField(id, value, fieldName, onSuccess) {
   fetch("http://localhost:8888/backend/api/updateRequest.php", {
     method: "POST",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
@@ -158,7 +161,7 @@ export function addScheduleGenerator(
       console.log(data);
     });
 }
-
+//
 export function handleSubmit(
   selectedService,
   name,
@@ -170,6 +173,7 @@ export function handleSubmit(
 ) {
   fetch("http://localhost:8888/backend/api/addRequest.php", {
     method: "POST",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
@@ -264,7 +268,7 @@ export function loadUser(roleID, setPreviewUser) {
       setPreviewUser(data);
     });
 }
-
+//
 export function loginDemo(roleID) {
   return fetch("http://localhost:8888/backend/api/loginDemo.php", {
     credentials: "include",
@@ -277,7 +281,7 @@ export function loginDemo(roleID) {
     }),
   }).then((response) => response.json());
 }
-
+//
 export function loadCurrentUser(setUser) {
   return fetch("http://localhost:8888/backend/api/getCurrentUser.php", {
     credentials: "include",

@@ -82,12 +82,20 @@ function App() {
 
 
             <h1>Выберите страницу:</h1>
+            <div>Тип пользователя: {user && user.role}</div>
+            {user && (user.role === "employee" || user.role === "admin" || user.role === "student") && (
+              <>
+                <Link to="/student">Запись</Link>
+              </>
+            )}
 
-            <Link to="/student">Запись</Link>
 
-            <br />
-
-            <Link to="/admin">Рабочая область</Link>
+            {user && (user.role === "employee" || user.role === "admin") && (
+              <>
+                <br />
+                <Link to="/admin">Рабочая область</Link>
+              </>
+            )}
 
 
           </div>
