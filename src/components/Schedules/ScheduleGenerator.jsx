@@ -109,12 +109,17 @@ function ScheduleGenerator(props) {
 
                 onClick={() => {
 
-                    addScheduleGenerator(employee_id, dateStart, dateEnd, timeStart, timeEnd, interval, workingDays).then(() => {
-                        alert("расписание  создано");
-                    })
+                    addScheduleGenerator(employee_id, dateStart, dateEnd, timeStart, timeEnd, interval, workingDays)
+                        .then((data) => {
+                            alert("Расписание создано");
+                        })
                         .catch((err) => {
                             console.error(err);
-                            alert("ошибкасоздании расписания");
+                            if (err.message) {
+                                alert(err.message);
+                            } else {
+                                alert("Ошибка создания расписания");
+                            }
                         });
                 }}
             >

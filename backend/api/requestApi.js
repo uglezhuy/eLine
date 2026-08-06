@@ -1,6 +1,8 @@
+//
 export function deleteRequest(id, onSuccess, CommentAdminForHistory) {
   fetch("http://localhost:8888/backend/api/deleteRequest.php", {
     method: "POST",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
@@ -87,34 +89,41 @@ export function updateRequestField(id, value, fieldName, onSuccess) {
       }
     });
 }
-
+//
 export function loadRequests(setRequests) {
-  fetch("http://localhost:8888/backend/api/getRequests.php")
+  fetch("http://localhost:8888/backend/api/getRequests.php", {
+    credentials: "include",
+  })
     .then((response) => response.json())
     .then((data) => {
       setRequests(data);
     });
 }
-
+//
 export function loadSchedule(setSchedule) {
-  fetch("http://localhost:8888/backend/api/getSchedule.php")
+  fetch("http://localhost:8888/backend/api/getSchedule.php", {
+    credentials: "include",
+  })
     .then((response) => response.json())
     .then((data) => {
       setSchedule(data);
     });
 }
-
+//
 export function loadScheduleAdmin(setSchedule) {
-  fetch("http://localhost:8888/backend/api/getScheduleAdmin.php")
+  fetch("http://localhost:8888/backend/api/getScheduleAdmin.php", {
+    credentials: "include",
+  })
     .then((response) => response.json())
     .then((data) => {
       setSchedule(data);
     });
 }
-
+//
 export function updateScheduleFieldisActive(id, isActive, onSuccess) {
   fetch("http://localhost:8888/backend/api/updateScheduleFieldisActive.php", {
     method: "POST",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
@@ -131,7 +140,7 @@ export function updateScheduleFieldisActive(id, isActive, onSuccess) {
       }
     });
 }
-
+//
 export function addScheduleGenerator(
   employee_id,
   dateStart,
@@ -143,23 +152,30 @@ export function addScheduleGenerator(
 ) {
   return fetch("http://localhost:8888/backend/api/addScheduleGenerator.php", {
     method: "POST",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      employee_id: employee_id,
-      dateStart: dateStart,
-      dateEnd: dateEnd,
-      timeStart: timeStart,
-      timeEnd: timeEnd,
-      interval: interval,
-      workingDays: workingDays,
+      employee_id,
+      dateStart,
+      dateEnd,
+      timeStart,
+      timeEnd,
+      interval,
+      workingDays,
     }),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data);
-    });
+  }).then(async (response) => {
+    const data = await response.json();
+
+    console.log(data);
+
+    if (!response.ok) {
+      throw data;
+    }
+
+    return data;
+  });
 }
 //
 export function handleSubmit(
@@ -195,7 +211,7 @@ export function handleSubmit(
       }
     });
 }
-
+//
 export function moveRequest(
   requestId,
   selectedScheduleId,
@@ -205,6 +221,7 @@ export function moveRequest(
 ) {
   fetch("http://localhost:8888/backend/api/moveRequest.php", {
     method: "POST",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
@@ -228,10 +245,11 @@ export function moveRequest(
       }
     });
 }
-
+//
 export function getRequestHistoryByID(RequestId, setRequestHistory) {
   fetch("http://localhost:8888/backend/api/getRequestHistoryByID.php", {
     method: "POST",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
@@ -244,10 +262,13 @@ export function getRequestHistoryByID(RequestId, setRequestHistory) {
       setRequestHistory(data);
     });
 }
-
+//
 export function loadServices(setServices) {
-  fetch("http://localhost:8888/backend/api/getServices.php")
+  fetch("http://localhost:8888/backend/api/getServices.php", {
+    credentials: "include",
+  })
     .then((response) => response.json())
+
     .then((data) => {
       setServices(data);
     });
