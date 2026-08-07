@@ -75,27 +75,8 @@ while ($start <= $end) {
 
 
     }
-
-
-
-
-
     $start->modify("+1 day");
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 echo json_encode([
     "success" => true
