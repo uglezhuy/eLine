@@ -29,9 +29,6 @@ function BottonFilter(props) {
                 Отклоненные
             </button>
 
-
-
-
             <div>
 
                 <strong>Поиск:</strong>
@@ -49,9 +46,6 @@ function BottonFilter(props) {
                 />
 
             </div>
-
-
-
 
             <div>
                 <strong>Сортировка по id:</strong>

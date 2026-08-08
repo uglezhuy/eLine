@@ -10,19 +10,8 @@ import { handleSubmit } from '../../../../backend/api/requestApi.js'
 
 function BookingForm(props) {
 
-
-
-
-
     const [selectedScheduleId, setSelectedScheduleId] = useState(null);
     const [selectedDay, selectedDaySet] = useState(null);
-
-
-
-
-
-
-
 
     const [name, setName] = useState("");
     const [studentTicket, setStudentTicket] = useState("");

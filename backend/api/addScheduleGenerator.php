@@ -56,24 +56,14 @@ while ($start <= $end) {
     $stmt = $pdo->prepare("INSERT INTO schedule (employee_id, schedule_date, schedule_time, is_active, is_busy ) values (:employee_id, :schedule_date, :schedule_time, 1, 0)");
 
     if ($workingDays[$dayKey]) {
-
         while ($currentTime <= $endTime) {
-
-
-
             $stmt->execute([
                 "employee_id" => $employee_id,
                 "schedule_date" => $start->format("Y-m-d"),
                 "schedule_time" => $currentTime->format("H:i:s")
             ]);
-
-
-
             $currentTime->modify("+{$interval} minutes");
         }
-
-
-
     }
     $start->modify("+1 day");
 }
