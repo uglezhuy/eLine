@@ -45,6 +45,7 @@ if (empty($setParts)) {
     exit;
 }
 
+
 $sql = "UPDATE requests SET " . implode(", ", $setParts) . " WHERE id = :id";
 
 $stmt = $pdo->prepare($sql);
