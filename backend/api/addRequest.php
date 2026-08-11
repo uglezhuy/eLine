@@ -1,5 +1,5 @@
 <?php
-
+require_once "../auth/auth.php";
 
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 require_once '../config/database.php';
 
 
-require_once "../auth/auth.php";
+
 
 requireRole(["employee", "admin", "student"]);
 

@@ -117,15 +117,17 @@ function AdminPage(props) {
             </Link>
             <br />
             <Link to="/student">
-                Студент
+                Запись
             </Link>
             <hr />
-            <h1>Администратор</h1>
+            <h1>Рабочая область</h1>
+
+            <h3>Тип пользователя: {userType.role}</h3>
+
             <div className="Cardus">
-                <ScheduleGenerator
-
-                />
-
+                {userType.role === "admin" && (
+                    <ScheduleGenerator />
+                )}
                 <Schedule
                     isAdmin={true}
                     requests={requests}

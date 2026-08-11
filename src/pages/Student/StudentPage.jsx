@@ -68,11 +68,11 @@ function StudentPage(props) {
             </Link>
             <br />
             <Link to="/admin">
-                Администратор
+                Рабочая область
             </Link>
             <hr />
 
-            <h1>Студент</h1>
+            <h1>Запись</h1>
             <h2>  Доступные услуги</h2>
 
 
