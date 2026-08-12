@@ -19,8 +19,9 @@ function Sequest_history(props) {
 
     return (
         <>
+            <h2>История заявок:</h2>
             <div className="Cardus">
-                <h4>История заявок:</h4>
+
 
                 <div> Выберете id зявки для отображения ее истории:</div>
                 <select

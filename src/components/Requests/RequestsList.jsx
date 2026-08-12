@@ -10,7 +10,7 @@ function RequestsList(props) {
     return (
         <>
 
-            <h4>Заявки:</h4>
+
             {props.requests.map((request, index) => (
                 <RequestsCard
                     key={index}

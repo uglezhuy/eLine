@@ -45,6 +45,9 @@ function AdminPage(props) {
     const [sortedRequests, setSortedRequests] = useState("");// сортировка 
 
 
+    const [activeSection, setActiveSection] = useState("requests"); // выбор секции (заявки, история, генератор)
+
+
     const filterRequests =      //filter создаёт новый массив, объекты внутри остаются теми же поэтому мы можем менять статусы
         statusFilter === "Все"
             ? requests
@@ -89,6 +92,7 @@ function AdminPage(props) {
 
 
 
+
     if (!userType) {
         return (
             <>
@@ -124,57 +128,105 @@ function AdminPage(props) {
 
             <h3>Тип пользователя: {userType.role}</h3>
 
-            <div className="Cardus">
-                {userType.role === "admin" && (
-                    <ScheduleGenerator />
-                )}
-                <Schedule
-                    isAdmin={true}
+            <button onClick={() => setActiveSection("requests")}>
+                📋 Заявки
+            </button>
+            <button onClick={() => setActiveSection("scheduleEdit")}>
+                📅 Редактирование расписания
+            </button>
+            <button onClick={() => setActiveSection("scheduleGenerate")}>
+                ⚙️ Генерация расписания (толко для админов)
+            </button>
+
+            <button onClick={() => setActiveSection("history")}>
+                📜 История
+            </button>
+
+            <button onClick={() => setActiveSection("services")}>
+                🛠 Услуги(разаработка)
+            </button>
+            <button onClick={() => setActiveSection("profile")}>
+                👤 Профиль
+            </button>
+            <hr />
+            {activeSection === "scheduleGenerate" && userType.role === "admin" && (
+                <><h2>Генерация расписания</h2>
+                    <div className="Cardus">
+                        {userType.role === "admin" && (
+                            <ScheduleGenerator />
+                        )}
+                    </div>
+                </>
+            )}
+            {activeSection === "scheduleEdit" && (
+                <> <h2>Редактирование расписания</h2>
+                    <div className="Cardus">
+                        <Schedule
+                            isAdmin={true}
+                            requests={requests}
+                            schedule={schedule}
+                            loadScheduleAdmin={() => loadScheduleAdmin(setSchedule)}
+                            selectedScheduleId={selectedScheduleId}
+                            setSelectedScheduleId={setSelectedScheduleId}
+                            selectedDay={selectedDay}
+                            selectedDaySet={selectedDaySet}
+                        />
+                    </div>
+                </>
+            )}
+
+            {activeSection === "history" && (
+                <Request_history
                     requests={requests}
-                    schedule={schedule}
-                    loadScheduleAdmin={() => loadScheduleAdmin(setSchedule)}
-                    selectedScheduleId={selectedScheduleId}
-                    setSelectedScheduleId={setSelectedScheduleId}
-                    selectedDay={selectedDay}
-                    selectedDaySet={selectedDaySet}
                 />
-            </div>
-            <hr />
+            )}
 
+            {activeSection === "requests" && (<>
+                <h2>Мои заявки</h2>
+                <BottonFilter
+                    statusFilter={statusFilter}
+                    setStatusFilter={setStatusFilter}
 
-            <Request_history
-                requests={requests}
-            />
-            <hr />
-            <BottonFilter
-                statusFilter={statusFilter}
-                setStatusFilter={setStatusFilter}
-
-                searchText={searchText}
-                setSearchText={setSearchText}
+                    searchText={searchText}
+                    setSearchText={setSearchText}
 
 
 
-                sortedRequests={sortedRequests}
-                setSortedRequests={setSortedRequests}
+                    sortedRequests={sortedRequests}
+                    setSortedRequests={setSortedRequests}
 
-            />
+                />
+            </>
+            )}
+            {activeSection === "requests" && (
+                <>
+                    <Requestslist
+                        requests={sorted}
 
+                        changeStatus={changeStatus}
+                        updateRequestField={updateRequestField}
+                        isAdmin={true}
+                        startWork={startWork} //костыль
+                        schedule={schedule}
+                        refreshRequests={() => loadRequests(setRequests)}
+                        setSchedule={setSchedule}
 
+                    />
+                </>
+            )}
+            {activeSection === "profile" && (
 
+                <div>
 
-            <Requestslist
-                requests={sorted}
+                    <h2>Профиль</h2>
 
-                changeStatus={changeStatus}
-                updateRequestField={updateRequestField}
-                isAdmin={true}
-                startWork={startWork} //костыль
-                schedule={schedule}
-                refreshRequests={() => loadRequests(setRequests)}
-                setSchedule={setSchedule}
+                    <p>Имя: {userType.name}</p>
 
-            />
+                    <p>Роль: {userType.role}</p>
+
+                </div>
+
+            )}
         </>
     );
 

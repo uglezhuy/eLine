@@ -16,6 +16,7 @@ import { loadSchedule } from '../../../backend/api/requestApi.js'
 import { loadRequests } from '../../../backend/api/requestApi.js'
 
 import { loadCurrentUser } from '../../../backend/api/requestApi.js'
+
 function StudentPage(props) {
     const [selectedService, setSelectedService] = useState(null);
 
@@ -24,6 +25,9 @@ function StudentPage(props) {
     const [schedule, setSchedule] = useState([]);
 
     const [userType, setUserType] = useState(null);
+
+    const [activeSection, setActiveSection] = useState("myRequests"); // выбор секции (заявки, история, генератор)
+
 
     useEffect(() => {
         loadCurrentUser(setUserType)
@@ -74,32 +78,71 @@ function StudentPage(props) {
 
             <h1>Запись</h1>
             <h2>  Доступные услуги</h2>
+            <button onClick={() => setActiveSection("newRequest")}>
+                📝 Новая заявка
+            </button>
 
+            <button onClick={() => setActiveSection("myRequests")}>
+                📋 Мои заявки
+            </button>
 
+            <button onClick={() => setActiveSection("services")}>
+                🛠 Услуги(разаработка)
+            </button>
 
-            <CardList
-                selectedService={selectedService}
-                setSelectedService={setSelectedService}
+            <button onClick={() => setActiveSection("myBookings")}>
+                📅 Мои записи(разаработка)
+            </button>
 
-            />
+            <button onClick={() => setActiveSection("profile")}>
+                👤 Профиль
+            </button>
 
-            <BookingForm
-                selectedService={selectedService}
-
-                requests={requests}
-                schedule={schedule}
-
-                loadRequests={() => loadRequests(setRequests)}
-                loadSchedule={() => loadSchedule(setSchedule)}
-            />
             <hr />
-            <Requestslist
-                requests={requests}
-                isAdmin={false}
-                schedule={schedule}
 
+            {activeSection === "newRequest" && (
+                <>
+                    <CardList
+                        selectedService={selectedService}
+                        setSelectedService={setSelectedService}
 
-            />
+                    />
+
+                    <BookingForm
+                        selectedService={selectedService}
+
+                        requests={requests}
+                        schedule={schedule}
+
+                        loadRequests={() => loadRequests(setRequests)}
+                        loadSchedule={() => loadSchedule(setSchedule)}
+                    />
+                </>
+            )}
+
+            {activeSection === "myRequests" && (<>
+
+                <Requestslist
+                    requests={requests}
+                    isAdmin={false}
+                    schedule={schedule}
+
+                />
+            </>
+            )}
+            {activeSection === "profile" && (
+
+                <div>
+
+                    <h2>Профиль</h2>
+
+                    <p>Имя: {userType.name}</p>
+
+                    <p>Роль: {userType.role}</p>
+
+                </div>
+
+            )}
 
 
 
