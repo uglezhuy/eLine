@@ -76,76 +76,160 @@ function StudentPage(props) {
             </Link>
             <hr />
 
-            <h1>Запись</h1>
-            <h2>  Доступные услуги</h2>
-            <button onClick={() => setActiveSection("newRequest")}>
-                📝 Новая заявка
-            </button>
+            <h4>Запись</h4>
 
-            <button onClick={() => setActiveSection("myRequests")}>
-                📋 Мои заявки
-            </button>
+            <div className="admin-layout">
 
-            <button onClick={() => setActiveSection("services")}>
-                🛠 Услуги(разаработка)
-            </button>
+                {/* Левая часть */}
+                <div className="admin-sidebar">
 
-            <button onClick={() => setActiveSection("myBookings")}>
-                📅 Мои записи(разаработка)
-            </button>
+                    <button
+                        className={
+                            activeSection === "newRequest"
+                                ? "sidebar-button active"
+                                : "sidebar-button"
+                        }
+                        onClick={() => setActiveSection("newRequest")}
+                    >
+                        📝 Новая заявка
+                    </button>
 
-            <button onClick={() => setActiveSection("profile")}>
-                👤 Профиль
-            </button>
+                    <button
+                        className={
+                            activeSection === "myRequests"
+                                ? "sidebar-button active"
+                                : "sidebar-button"
+                        }
+                        onClick={() => setActiveSection("myRequests")}
+                    >
+                        📋 Мои заявки
+                    </button>
 
-            <hr />
+                    <button
+                        className={
+                            activeSection === "myBookings"
+                                ? "sidebar-button active"
+                                : "sidebar-button"
+                        }
+                        onClick={() => setActiveSection("myBookings")}
+                    >
 
-            {activeSection === "newRequest" && (
-                <>
-                    <CardList
-                        selectedService={selectedService}
-                        setSelectedService={setSelectedService}
+                        📅 Мои записи
 
-                    />
+                    </button>
+                    <button
+                        className={
+                            activeSection === "services"
+                                ? "sidebar-button active"
+                                : "sidebar-button"
+                        }
+                        onClick={() => setActiveSection("services")}
+                    >
+                        🛠 Услуги(РАЗАРАБОТКА)
+                    </button>
 
-                    <BookingForm
-                        selectedService={selectedService}
 
-                        requests={requests}
-                        schedule={schedule}
 
-                        loadRequests={() => loadRequests(setRequests)}
-                        loadSchedule={() => loadSchedule(setSchedule)}
-                    />
-                </>
-            )}
-
-            {activeSection === "myRequests" && (<>
-
-                <Requestslist
-                    requests={requests}
-                    isAdmin={false}
-                    schedule={schedule}
-
-                />
-            </>
-            )}
-            {activeSection === "profile" && (
-
-                <div>
-
-                    <h2>Профиль</h2>
-
-                    <p>Имя: {userType.name}</p>
-
-                    <p>Роль: {userType.role}</p>
+                    <button
+                        className={
+                            activeSection === "profile"
+                                ? "sidebar-button active"
+                                : "sidebar-button"
+                        }
+                        onClick={() => setActiveSection("profile")}
+                    >
+                        👤 Профиль
+                    </button>
 
                 </div>
 
-            )}
+
+                {/* Правая часть */}
+                <div className="admin-content">
+
+                    {activeSection === "newRequest" && (
+                        <>
+                            <h2>Новая заявка</h2>
+
+                            <div className="Cardus">
+                                <CardList
+                                    selectedService={selectedService}
+                                    setSelectedService={setSelectedService}
+                                />
+
+                                <BookingForm
+                                    selectedService={selectedService}
+                                    requests={requests}
+                                    schedule={schedule}
+                                    loadRequests={() => loadRequests(setRequests)}
+                                    loadSchedule={() => loadSchedule(setSchedule)}
+                                />
+                            </div>
+                        </>
+                    )}
+
+                    {activeSection === "myRequests" && (
+                        <>
+                            <h2>Мои заявки</h2>
+
+                            <div className="Cardus">
+                                <Requestslist
+                                    requests={requests}
+                                    isAdmin={false}
+                                    schedule={schedule}
+                                />
+                            </div>
+                        </>
+                    )}
 
 
 
+                    {activeSection === "myBookings" && (
+
+                        <>
+
+                            <h2>Мои записи</h2>
+
+                            <div className="Cardus">
+
+
+                                РАЗРАБОТКА(записиси корые уже назначеный повремяни и ожидают приема)
+
+                            </div>
+
+                        </>
+
+                    )}
+
+
+                    {activeSection === "services" && (
+                        <>
+                            <h2>Услуги(РАЗАРАБОТКА)</h2>
+
+                            <div className="Cardus">
+                                РАЗАРБОТКА
+                            </div>
+                        </>
+                    )}
+
+
+
+                    {activeSection === "profile" && (<>
+                        <h2>Профиль</h2>
+                        <div className="Cardus">
+
+
+
+                            <p>Имя: {userType.name}</p>
+                            <p>Роль: {userType.role}</p>
+
+                        </div>
+                    </>
+                    )}
+
+                </div>
+
+            </div>
         </>
     );
 }

@@ -1,4 +1,4 @@
-import './ServiceCard.css'
+
 import { useState } from 'react'
 import Schedule from '../../../components/Schedules/Schedule';
 

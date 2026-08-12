@@ -1,0 +1,167 @@
+body {
+    margin: 0;
+    background: #f5f6fa;
+    font-family: Arial, sans-serif;
+    color: #222;
+}
+
+.App {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* Общие карточки */
+
+.Cardus,
+.request-card,
+.request-filters {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 18px;
+    margin: 20px 0;
+}
+
+/* Кнопки */
+
+.Cardus button,
+.request-btn {
+    padding: 9px 14px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 8px;
+    background: #5b4be7;
+    color: white;
+    cursor: pointer;
+}
+
+.Cardus button:hover {
+    background: #4939d0;
+}
+
+
+/* Админская область */
+
+.admin-layout {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.admin-sidebar {
+    width: 230px;
+    padding: 10px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.sidebar-button {
+    width: 100%;
+    padding: 11px;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    text-align: left;
+    cursor: pointer;
+    color: #333;
+}
+
+.sidebar-button.active {
+    background: #5b4be7;
+    color: white;
+}
+
+.admin-content {
+    flex: 1;
+}
+
+/* Заявка */
+
+
+
+.request-section {
+    padding: 14px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.request-section h4 {
+    margin: 0 0 10px;
+}
+
+.request-info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.request-info-grid > div,
+.request-comment {
+    padding: 10px;
+    background: #f8f8fa;
+    border-radius: 8px;
+}
+
+.request-info-grid span {
+    display: block;
+    margin-bottom: 4px;
+    color: #777;
+    font-size: 12px;
+}
+
+.request-comment {
+    margin-top: 10px;
+}
+
+/* Поля */
+
+.request-field {
+    margin-bottom: 12px;
+}
+
+.request-field label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 13px;
+    color: #666;
+}
+
+.request-field input
+{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 9px 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+
+/* Фильтр */
+
+.request-filters {
+    padding: 12px;
+}
+
+.filter-btn {
+    padding: 7px 11px;
+    border: 1px solid #ddd;
+    border-radius: 7px;
+    background: white;
+    color: #333;
+    cursor: pointer;
+}
+
+.filter-btn:hover {
+    background: #f5f3ff;
+}
+
+.filter-btn.active {
+    background: #5b4be7;
+    color: white;
+    border-color: #5b4be7;
+}

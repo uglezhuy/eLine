@@ -1,4 +1,4 @@
-import './ServiceCard.css'
+
 import CardUsluga from '../components/ServiceCard'
 import { useEffect, useState } from 'react'
 import { loadServices } from '../../../../backend/api/requestApi.js'

@@ -1,67 +1,100 @@
 function BottonFilter(props) {
     return (
-        <>
-            <button onClick={() => props.setStatusFilter("Все")}>
-                Все
-            </button>
+        <div className="request-filters">
 
-            <button onClick={() => props.setStatusFilter("Ожидает подтверждения")}>
-                Ожидают подтверждения
-            </button>
+            <div >
 
-            <button onClick={() => props.setStatusFilter("Подтверждено")}>
-                Подтвержденные
-            </button>
+                <button
+                    className={props.statusFilter === "Все" ? "filter-btn active" : "filter-btn"}
+                    onClick={() => props.setStatusFilter("Все")}
+                >
+                    Все
+                </button>
 
-            <button onClick={() => props.setStatusFilter("В обработке")}>
-                В обработке
-            </button>
+                <button
+                    className={props.statusFilter === "Ожидает подтверждения" ? "filter-btn active" : "filter-btn"}
+                    onClick={() => props.setStatusFilter("Ожидает подтверждения")}
+                >
+                    Ожидают подтверждения
+                </button>
 
-            <button onClick={() => props.setStatusFilter("Готово к выдаче")}>
-                Готово к выдаче
-            </button>
+                <button
+                    className={props.statusFilter === "Подтверждено" ? "filter-btn active" : "filter-btn"}
+                    onClick={() => props.setStatusFilter("Подтверждено")}
+                >
+                    Подтвержденные
+                </button>
 
-            <button onClick={() => props.setStatusFilter("Завершено")}>
-                Завершенные
-            </button>
+                <button
+                    className={props.statusFilter === "В обработке" ? "filter-btn active" : "filter-btn"}
+                    onClick={() => props.setStatusFilter("В обработке")}
+                >
+                    В обработке
+                </button>
 
-            <button onClick={() => props.setStatusFilter("Отклонено")}>
-                Отклоненные
-            </button>
+                <button
+                    className={props.statusFilter === "Готово к выдаче" ? "filter-btn active" : "filter-btn"}
+                    onClick={() => props.setStatusFilter("Готово к выдаче")}
+                >
+                    Готово к выдаче
+                </button>
 
-            <div>
+                <button
+                    className={props.statusFilter === "Завершено" ? "filter-btn active" : "filter-btn"}
+                    onClick={() => props.setStatusFilter("Завершено")}
+                >
+                    Завершенные
+                </button>
 
+                <button
+                    className={props.statusFilter === "Отклонено" ? "filter-btn active" : "filter-btn"}
+                    onClick={() => props.setStatusFilter("Отклонено")}
+                >
+                    Отклоненные
+                </button>
+
+            </div>
+
+
+            <div >
                 <strong>Поиск:</strong>
 
                 <input
-
                     type="text"
-
-                    placeholder="Имя, ID или номер зачётной книжки, телефон"
-
+                    placeholder="Имя, ID, зачётная книжка или телефон"
                     value={props.searchText}
-
                     onChange={(e) => props.setSearchText(e.target.value)}
-
                 />
-
             </div>
+
 
             <div>
-                <strong>Сортировка по id:</strong>
-                <button onClick={() => props.setSortedRequests("")}>Сброс</button>
+                <strong>Сортировка по ID:</strong>
 
-                <button onClick={() => props.setSortedRequests("По убыванию")}>Больше</button>
-                <button onClick={() => props.setSortedRequests("По возрастанию")}>Меньше</button>
+                <button
+                    className="filter-btn"
+                    onClick={() => props.setSortedRequests("")}
+                >
+                    Сброс
+                </button>
 
+                <button
+                    className="filter-btn"
+                    onClick={() => props.setSortedRequests("По убыванию")}
+                >
+                    Больше
+                </button>
+
+                <button
+                    className="filter-btn"
+                    onClick={() => props.setSortedRequests("По возрастанию")}
+                >
+                    Меньше
+                </button>
             </div>
 
-
-        </>
-    )
+        </div>
+    );
 }
-
-
-
 
 export default BottonFilter;
