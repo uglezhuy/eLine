@@ -23,7 +23,7 @@ function Sequest_history(props) {
             <div className="Cardus">
 
 
-                <div> Выберете id зявки для отображения ее истории:</div>
+                <div> Выберете id зявки для отображения ее истории: (только не удаленные завяки, далее добавлять фильтр чтоб модно было отображать узаленные заявки )</div>
                 <select
                     value={RequestId ?? ""}
                     onChange={(e) =>

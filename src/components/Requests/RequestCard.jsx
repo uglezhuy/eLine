@@ -302,20 +302,7 @@ function RequestsCard(props) {
                                 📅 Перенести время
                             </button>
 
-                            <button
-                                className="request-btn danger-outline"
-                                onClick={() => {
-                                    deleteRequest(
-                                        props.request.id,
-                                        props.refreshRequests,
-                                        CommentAdminForHistory
-                                    );
 
-                                    setCommentAdminForHistory("");
-                                }}
-                            >
-                                🗑 Удалить заявку
-                            </button>
 
                         </div>
 
@@ -337,19 +324,34 @@ function RequestsCard(props) {
 
                     </div>
                 )}
+                <button
+                    className="request-btn danger-outline"
+                    onClick={() => {
+                        deleteRequest(
+                            props.request.id,
+                            props.refreshRequests,
+                            CommentAdminForHistory
+                        );
 
+                        setCommentAdminForHistory("");
+                    }}
+                >
+                    🗑 Удалить заявку
+                </button>
+                {props.isAdmin && MoveMode && (
+                    <MoveRequest
+                        setMoveMode={setMoveMode}
+                        request={props.request}
+                        refreshRequests={props.refreshRequests}
+                        schedule={props.schedule}
+                        setSchedule={props.setSchedule}
+                    />
+                )}
             </div>
 
 
-            {props.isAdmin && MoveMode && (
-                <MoveRequest
-                    setMoveMode={setMoveMode}
-                    request={props.request}
-                    refreshRequests={props.refreshRequests}
-                    schedule={props.schedule}
-                    setSchedule={props.setSchedule}
-                />
-            )}
+
+
         </>
     );
 }

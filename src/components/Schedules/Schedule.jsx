@@ -18,6 +18,10 @@ function Schedule(props) {
         return uniqueDays;
     }
 
+    const uniqueDays = getUniqueDays(props.schedule);
+    if (uniqueDays.length === 0) {
+        return <div>!!!!!!!!!!!Нет свободных дат, обратитесь к администратору!!!!!!!!!</div>;
+    }
     return (
         <>
             {
@@ -129,19 +133,7 @@ function Schedule(props) {
                                     }
 
                                 }
-
-
-
-
-
-
-
-
-
                             }
-
-
-
                             )}
                         </div>
 
@@ -149,9 +141,6 @@ function Schedule(props) {
                 }
 
             </>
-
-
-
         </>
     )
 }

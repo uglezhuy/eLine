@@ -11,6 +11,7 @@ require_once '../config/database.php';
 
 
 requireRole(["employee", "admin", "student"]);
+$user = currentUser();
 
 $data = json_decode(file_get_contents("php://input"), true);
 
@@ -40,14 +41,24 @@ $stmt2->bindParam(':id', $request['selected_schedule_id']);
 $stmt2->execute();
 
 //добавление Sequest_history
-$sql3 = "INSERT INTO request_history (request_id, action, comment, new_value)
-VALUES (:id, :action, :comment, :new_value)";
+$sql3 = "INSERT INTO request_history 
+(request_id, action, new_value, changed_by_type, changed_by_id, changed_by_name, comment)
+VALUES (:request_id, :action, :new_value, :changed_by_type, :changed_by_id, :changed_by_name, :comment)";
+
 $stmt3 = $pdo->prepare($sql3);
+
 $action = "DELETE";
-$stmt3->bindParam(':id', $id);
-$stmt3->bindParam(':action', $action);
-$stmt3->bindParam(':comment', $CommentAdminForHistory);
+
+$stmt3->bindValue(':request_id', $id, PDO::PARAM_INT);
+$stmt3->bindValue(':action', $action);
 $stmt3->bindValue(':new_value', "Удалено");
+
+$stmt3->bindValue(':changed_by_type', $user["role"]);
+$stmt3->bindValue(':changed_by_id', $user["id"], PDO::PARAM_INT);
+$stmt3->bindValue(':changed_by_name', $user["name"]);
+
+$stmt3->bindValue(':comment', $CommentAdminForHistory);
+
 $stmt3->execute();
 
 
